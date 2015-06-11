@@ -1,7 +1,7 @@
 /*
  * imgCheckboxes
  *
- * Version: 0.2
+ * Version: 0.3
  * License: GPLv2
  * Author:  James Cuénod
  * Last Modified: 2015.06.11
@@ -93,15 +93,13 @@
 
 	/* CSS Injection */
 	function injectStylesheet(stylesObject, id){
-		// if there are no stylesheets, create a blank one
-		if (document.styleSheets.length < 1)
-		{
-			var style = document.createElement("style");
-			// WebKit hack
-			style.appendChild(document.createTextNode(""));
-			// Add the <style> element to the page
-			document.head.appendChild(style);
-		}
+		// Create a blank style
+		var style = document.createElement("style");
+		// WebKit hack
+		style.appendChild(document.createTextNode(""));
+		// Add the <style> element to the page
+		document.head.appendChild(style);
+
 		var stylesheet = document.styleSheets[document.styleSheets.length - 1];
 
 		for (var selector in stylesObject){
@@ -132,7 +130,7 @@
 
 
 	/* Init */
-	$.fn.imgCheckboxes = function(options){
+	$.fn.imgCheckbox = function(options){
         if ($(this).data("imgCheckboxId"))
         	return $.fn.imgCheckboxes.instances[$(this).data("imgCheckboxId") - 1]
         else
