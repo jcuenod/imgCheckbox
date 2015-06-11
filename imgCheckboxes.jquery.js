@@ -1,105 +1,175 @@
 (function($) {
-	var wrapperElement;
 
-    $.fn.imgCheckboxes = function() {
-        this.wrap("<span class='fancychecks'>");
-        wrapperElement = this.parent();
-        wrapperElement.click(function() {
+	var imgCheckboxClass = function(element, opts, id) {
+		var options = opts, wrapperElement,
+		grayscaleStyles = {
+			"span.imgCheckbox img": {
+				"transform": "scale(1)",
+				"filter": "none",
+				"-webkit-filter": "grayscale(0)"
+			},
+			"span.imgCheckbox.checked img": {
+				//"filter": "gray", //TODO - this line probably will not work but is necessary for IE
+				"filter": "grayscale(1)",
+				"-webkit-filter": "grayscale(1)"
+			}
+		}, scaleStyles = {
+			"span.imgCheckbox img": {
+				"transform": "scale(1)",
+			},
+			"span.imgCheckbox.checked img": {
+				"transform": "scale(0.8)",
+			}
+		}, scaleCheckMarkStyles = {
+			"span.imgCheckbox::before": {
+				"transform": "scale(0)"
+			},
+			"span.imgCheckbox.checked::before": {
+				"transform": "scale(1)"
+			}
+		}, fadeCheckMarkStyles = {
+			"span.imgCheckbox::before": {
+				"opacity": "0"
+			},
+			"span.imgCheckbox.checked::before": {
+				"opacity": "1"
+			}
+		};;
+
+		/* *** STYLESHEET STUFF *** */
+		// shove in the custom check mark
+		options.styles["span.imgCheckbox::before"]["background-image"] =
+			"url('" + options.checkMarkImage + "')";
+		// give the checkmark dimensions
+		var dimensions = options.checkMarkSize.split(" ");
+		options.styles["span.imgCheckbox::before"]["width"] = dimensions[0];
+		options.styles["span.imgCheckbox::before"]["height"] = dimensions[dimensions.length - 1];
+		// fixed image sizes
+		if (options.fixedImageSize)
+		{
+			options.styles["span.imgCheckbox::before"]["height"]
+		}
+		// extend with grayscale for the selected images (if set to true)
+		if (options.graySelected)
+			$.extend(true, options.styles, grayscaleStyles);
+		//extend with scale styles (if set to true)
+		if (options.scaleSelected)
+			$.extend(true, options.styles, scaleStyles);
+		//extend with scale styles (if set to true)
+		if (options.scaleCheckMark)
+			$.extend(true, options.styles, scaleCheckMarkStyles);
+		//extend with scale styles (if set to true)
+		if (options.fadeCheckMark)
+			$.extend(true, options.styles, fadeCheckMarkStyles);
+
+		//Now that we've built up our styles, inject them
+		injectStylesheet(options.styles, id);
+
+
+		/* *** DOM STUFF *** */
+		element.wrap("<span class='imgCheckbox" + id + "'>");
+		wrapperElement = element.parent();
+		wrapperElement.click(function() {
 			$(this).toggleClass("checked");
 		});
-		injectStylesheet();
-    };
+	};
 
-    function injectStylesheet(){
-    	// if there are no stylesheets, create a blank one
-    	if (document.styleSheets.length < 1)
-    	{
-	    	var style = document.createElement("style");
-		    // WebKit hack
-		    style.appendChild(document.createTextNode(""));
-		    // Add the <style> element to the page
-		    document.head.appendChild(style);
-    	}
-    	var stylesheet = document.styleSheets[document.styleSheets.length - 1];
+	/* CSS Injection */
+	function injectStylesheet(stylesObject, id){
+		// if there are no stylesheets, create a blank one
+		if (document.styleSheets.length < 1)
+		{
+			var style = document.createElement("style");
+			// WebKit hack
+			style.appendChild(document.createTextNode(""));
+			// Add the <style> element to the page
+			document.head.appendChild(style);
+		}
+		var stylesheet = document.styleSheets[document.styleSheets.length - 1];
 
-    	styles.forEach(function(style){
-    		compatInsertRule(stylesheet, style.selector, buildRules(style.rules));
-    	})
-    }
-    function buildRules(ruleSet)
-    {
-    	var cssrule = "";
-    	ruleSet.forEach(function(rule) {
-    		cssrule += rule.property + ":" + rule.value + ";";
-    	})
-    	return cssrule;
-    }
-    function compatInsertRule(stylesheet, selector, cssText){
-    	// IE8 uses "addRule", everyone else uses "insertRule"
-        if (stylesheet.insertRule) {
-            stylesheet.insertRule(selector + '{' + cssText + '}', 0);
-        } else {
-            stylesheet.addRule(selector, cssText, 0);
+		for (var selector in stylesObject){
+    		if (stylesObject.hasOwnProperty(selector)) {
+    			compatInsertRule(stylesheet, selector, buildRules(stylesObject[selector]), id);
+    		}
+		}
+	}
+	function buildRules(ruleObject)
+	{
+		var ruleSet = "";
+		for (var property in ruleObject){
+    		if (ruleObject.hasOwnProperty(property)) {
+         		 ruleSet += property + ":" + ruleObject[property] + ";";
+    		}
+		}
+		return ruleSet;
+	}
+	function compatInsertRule(stylesheet, selector, cssText, id){
+		var modifiedSelector = selector.replace(".imgCheckbox", ".imgCheckbox" + id);
+		// IE8 uses "addRule", everyone else uses "insertRule"
+		if (stylesheet.insertRule) {
+			stylesheet.insertRule(modifiedSelector + '{' + cssText + '}', 0);
+		} else {
+			stylesheet.addRule(modifiedSelector, cssText, 0);
+		}
+	}
+
+
+
+	$.fn.imgCheckboxes = function(options){
+        var opts = $.extend(true, {}, $.fn.imgCheckboxes.defaults, options);
+        if ($.fn.imgCheckboxes.instances.indexOf(this) >= 0)
+        	return $.fn.imgCheckboxes.instances[$.fn.imgCheckboxes.instances.indexOf(this)]
+        else
+        {
+        	var $that = new imgCheckboxClass($(this), opts, $.fn.imgCheckboxes.instances.length)
+        	$.fn.imgCheckboxes.instances.push($that);
+	        return $that;
         }
-    }
-
-    var styles = [{
-    	"selector": "span.fancychecks img",
-    	"rules": [
-			{ "property": "display", "value": "block" },
-			{ "property": "margin", "value": "0" },
-			{ "property": "padding", "value": "0" },
-			{ "property": "transition-duration", "value": "300ms" },
-			{ "property": "transform", "value": "scale(1)" },
-			{ "property": "filter", "value": "none" },
-			{ "property": "-webkit-filter", "value": "grayscale(0)" }
-		]
-	},{
-    	"selector": "span.fancychecks.checked img",
-    	"rules": [
-			{ "property": "transform", "value": "scale(0.8)" },
-			//{ "property": "filter", "value": "gray" }, //TODO - this line probably will not work but is necessary for IE
-			{ "property": "filter", "value": "grayscale(1)" },
-			{ "property": "-webkit-filter", "value": "grayscale(1)" }
-		]
-	},{
-    	"selector": "span.fancychecks",
-    	"rules": [
-    		{ "property": "padding", "value": "0" },
-			{ "property": "margin", "value": "5px" },
-			{ "property": "display", "value": "inline-block" },
-			{ "property": "border", "value": "1px solid transparent" },
-			{ "property": "transition-duration", "value": "300ms" }
-		]
-	},{
-    	"selector": "span.fancychecks.checked",
-    	"rules": [
-    		{ "property": "border-color", "value": "#ccc" }
-    	]
-	},{
-    	"selector": "span.fancychecks::before",
-    	"rules": [
-			{ "property": "display", "value": "block" },
-			{ "property": "background-image", "value": "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtMzQ2LjM4NCkiPjxwYXRoIGZpbGw9IiMxZWM4MWUiIGZpbGwtb3BhY2l0eT0iLjgiIGQ9Ik0zMiAzNDYuNGEzMiAzMiAwIDAgMC0zMiAzMiAzMiAzMiAwIDAgMCAzMiAzMiAzMiAzMiAwIDAgMCAzMi0zMiAzMiAzMiAwIDAgMC0zMi0zMnptMjEuMyAxMC4zbC0yNC41IDQxTDkuNSAzNzVsMTcuNyA5LjYgMjYtMjh6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTkuNSAzNzUuMmwxOS4zIDIyLjQgMjQuNS00MS0yNiAyOC4yeiIvPjwvZz48L3N2Zz4=')" },
-			{ "property": "background-size", "value": "100% 100%" },
-			{ "property": "content", "value": "''" },
-			{ "property": "color", "value": "white" },
-			{ "property": "font-weight", "value": "bold" },
-			{ "property": "border-radius", "value": "50%" },
-			{ "property": "position", "value": "absolute" },
-			{ "property": "margin", "value": "0.5%" },
-			{ "property": "z-index", "value": "1" },
-			{ "property": "width", "value": "40px" },
-			{ "property": "height", "value": "40px" },
-			{ "property": "text-align", "value": "center" },
-			{ "property": "transform", "value": "scale(0)" },
-			{ "property": "transition-duration", "value": "300ms" }
-		]
-	},{
-    	"selector": "span.fancychecks.checked::before",
-    	"rules": [
-    		{ "property": "transform", "value": "scale(1)" }
-    	]
-	}];
+	}
+	$.fn.imgCheckboxes.instances = [];
+	$.fn.imgCheckboxes.defaults = {
+		"styles": {
+			"span.imgCheckbox img": {
+				"display": "block",
+				"margin": "0",
+				"padding": "0",
+				"transition-duration": "300ms",
+				"width": "120px",
+				"height": "120px",
+			},
+			"span.imgCheckbox": {
+				"padding": "0",
+				"margin": "5px",
+				"display": "inline-block",
+				"border": "1px solid transparent",
+				"transition-duration": "300ms"
+			},
+			"span.imgCheckbox.checked": {
+				"border-color": "#ccc"
+			},
+			"span.imgCheckbox::before": {
+				"display": "block",
+				"background-size": "100% 100%",
+				"content": "''",
+				"color": "white",
+				"font-weight": "bold",
+				"border-radius": "50%",
+				"position": "absolute",
+				"margin": "0.5%",
+				"z-index": "1",
+				"text-align": "center",
+				"transition-duration": "300ms"
+			},
+			"span.imgCheckbox.checked::before": {
+			}
+		},
+		"checkMarkImage": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtMzQ2LjM4NCkiPjxwYXRoIGZpbGw9IiMxZWM4MWUiIGZpbGwtb3BhY2l0eT0iLjgiIGQ9Ik0zMiAzNDYuNGEzMiAzMiAwIDAgMC0zMiAzMiAzMiAzMiAwIDAgMCAzMiAzMiAzMiAzMiAwIDAgMCAzMi0zMiAzMiAzMiAwIDAgMC0zMi0zMnptMjEuMyAxMC4zbC0yNC41IDQxTDkuNSAzNzVsMTcuNyA5LjYgMjYtMjh6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTkuNSAzNzUuMmwxOS4zIDIyLjQgMjQuNS00MS0yNiAyOC4yeiIvPjwvZz48L3N2Zz4=",
+		"graySelected": true,
+		"scaleSelected": true,
+		"fixedImageSize": false,
+		"checkMarkSize": "30px",
+		"scaleCheckMark": true,
+		"fadeCheckMark": false,
+	}
 
 })( jQuery );
