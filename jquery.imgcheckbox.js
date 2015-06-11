@@ -93,15 +93,13 @@
 
 	/* CSS Injection */
 	function injectStylesheet(stylesObject, id){
-		// if there are no stylesheets, create a blank one
-		if (document.styleSheets.length < 1)
-		{
-			var style = document.createElement("style");
-			// WebKit hack
-			style.appendChild(document.createTextNode(""));
-			// Add the <style> element to the page
-			document.head.appendChild(style);
-		}
+		// Create a blank style
+		var style = document.createElement("style");
+		// WebKit hack
+		style.appendChild(document.createTextNode(""));
+		// Add the <style> element to the page
+		document.head.appendChild(style);
+
 		var stylesheet = document.styleSheets[document.styleSheets.length - 1];
 
 		for (var selector in stylesObject){
