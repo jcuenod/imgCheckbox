@@ -1,3 +1,12 @@
+/*
+ * imgCheckboxes
+ *
+ * Version: 0.2
+ * License: GPLv2
+ * Author:  James Cuénod
+ * Last Modified: 2015.06.11
+ *
+ */
 (function($) {
 
 	var imgCheckboxClass = function(element, opts, id) {
@@ -8,7 +17,7 @@
 				"filter": "none",
 				"-webkit-filter": "grayscale(0)"
 			},
-			"span.imgCheckbox.checked img": {
+			"span.imgCheckbox.imgChked img": {
 				//"filter": "gray", //TODO - this line probably will not work but is necessary for IE
 				"filter": "grayscale(1)",
 				"-webkit-filter": "grayscale(1)"
@@ -17,21 +26,21 @@
 			"span.imgCheckbox img": {
 				"transform": "scale(1)",
 			},
-			"span.imgCheckbox.checked img": {
+			"span.imgCheckbox.imgChked img": {
 				"transform": "scale(0.8)",
 			}
 		}, scaleCheckMarkStyles = {
 			"span.imgCheckbox::before": {
 				"transform": "scale(0)"
 			},
-			"span.imgCheckbox.checked::before": {
+			"span.imgCheckbox.imgChked::before": {
 				"transform": "scale(1)"
 			}
 		}, fadeCheckMarkStyles = {
 			"span.imgCheckbox::before": {
 				"opacity": "0"
 			},
-			"span.imgCheckbox.checked::before": {
+			"span.imgCheckbox.imgChked::before": {
 				"opacity": "1"
 			}
 		};;
@@ -41,13 +50,15 @@
 		options.styles["span.imgCheckbox::before"]["background-image"] =
 			"url('" + options.checkMarkImage + "')";
 		// give the checkmark dimensions
-		var dimensions = options.checkMarkSize.split(" ");
-		options.styles["span.imgCheckbox::before"]["width"] = dimensions[0];
-		options.styles["span.imgCheckbox::before"]["height"] = dimensions[dimensions.length - 1];
+		var chkDimensions = options.checkMarkSize.split(" ");
+		options.styles["span.imgCheckbox::before"]["width"] = chkDimensions[0];
+		options.styles["span.imgCheckbox::before"]["height"] = chkDimensions[chkDimensions.length - 1];
 		// fixed image sizes
 		if (options.fixedImageSize)
 		{
-			options.styles["span.imgCheckbox::before"]["height"]
+			var imgDimensions = options.fixedImageSize.split(" ");
+			options.styles["span.imgCheckbox img"]["width"] = imgDimensions[0];
+			options.styles["span.imgCheckbox img"]["height"] = imgDimensions[imgDimensions.length - 1];
 		}
 		// extend with grayscale for the selected images (if set to true)
 		if (options.graySelected)
@@ -70,8 +81,9 @@
 		element.wrap("<span class='imgCheckbox" + id + "'>");
 		wrapperElement = element.parent();
 		wrapperElement.click(function() {
-			$(this).toggleClass("checked");
+			$(this).toggleClass("imgChked");
 		});
+		return this;
 	};
 
 	/* CSS Injection */
@@ -114,15 +126,15 @@
 	}
 
 
-
+	/* Init */
 	$.fn.imgCheckboxes = function(options){
         var opts = $.extend(true, {}, $.fn.imgCheckboxes.defaults, options);
-        if ($.fn.imgCheckboxes.instances.indexOf(this) >= 0)
-        	return $.fn.imgCheckboxes.instances[$.fn.imgCheckboxes.instances.indexOf(this)]
+        if ($(this).data("imgCheckboxId"))
+        	return $.fn.imgCheckboxes.instances[$(this).data("imgCheckboxId") - 1]
         else
         {
         	var $that = new imgCheckboxClass($(this), opts, $.fn.imgCheckboxes.instances.length)
-        	$.fn.imgCheckboxes.instances.push($that);
+        	$(this).data("imgCheckboxId", $.fn.imgCheckboxes.instances.push($that));
 	        return $that;
         }
 	}
@@ -134,17 +146,16 @@
 				"margin": "0",
 				"padding": "0",
 				"transition-duration": "300ms",
-				"width": "120px",
-				"height": "120px",
 			},
 			"span.imgCheckbox": {
+				"user-select": "none",
 				"padding": "0",
 				"margin": "5px",
 				"display": "inline-block",
 				"border": "1px solid transparent",
 				"transition-duration": "300ms"
 			},
-			"span.imgCheckbox.checked": {
+			"span.imgCheckbox.imgChked": {
 				"border-color": "#ccc"
 			},
 			"span.imgCheckbox::before": {
@@ -160,7 +171,7 @@
 				"text-align": "center",
 				"transition-duration": "300ms"
 			},
-			"span.imgCheckbox.checked::before": {
+			"span.imgCheckbox.imgChked::before": {
 			}
 		},
 		"checkMarkImage": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtMzQ2LjM4NCkiPjxwYXRoIGZpbGw9IiMxZWM4MWUiIGZpbGwtb3BhY2l0eT0iLjgiIGQ9Ik0zMiAzNDYuNGEzMiAzMiAwIDAgMC0zMiAzMiAzMiAzMiAwIDAgMCAzMiAzMiAzMiAzMiAwIDAgMCAzMi0zMiAzMiAzMiAwIDAgMC0zMi0zMnptMjEuMyAxMC4zbC0yNC41IDQxTDkuNSAzNzVsMTcuNyA5LjYgMjYtMjh6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTkuNSAzNzUuMmwxOS4zIDIyLjQgMjQuNS00MS0yNiAyOC4yeiIvPjwvZz48L3N2Zz4=",
