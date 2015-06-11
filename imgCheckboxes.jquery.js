@@ -9,9 +9,8 @@
  */
 (function($) {
 
-	var imgCheckboxClass = function(element, opts, id) {
-		var options = opts, wrapperElement,
-		grayscaleStyles = {
+	var imgCheckboxClass = function(element, options, id) {
+		var wrapperElement, $_options = {}, grayscaleStyles = {
 			"span.imgCheckbox img": {
 				"transform": "scale(1)",
 				"filter": "none",
@@ -43,38 +42,44 @@
 			"span.imgCheckbox.imgChked::before": {
 				"opacity": "1"
 			}
-		};;
+		};
 
 		/* *** STYLESHEET STUFF *** */
 		// shove in the custom check mark
-		options.styles["span.imgCheckbox::before"]["background-image"] =
-			"url('" + options.checkMarkImage + "')";
+		if (options.checkMarkImage != false)
+			$.extend(true, $_options,{ "styles": { "span.imgCheckbox::before": { "background-image": "url('" + options.checkMarkImage + "')" }}});
 		// give the checkmark dimensions
 		var chkDimensions = options.checkMarkSize.split(" ");
-		options.styles["span.imgCheckbox::before"]["width"] = chkDimensions[0];
-		options.styles["span.imgCheckbox::before"]["height"] = chkDimensions[chkDimensions.length - 1];
+		$.extend(true, $_options,{ "styles": { "span.imgCheckbox::before": { 
+			"width": chkDimensions[0],
+			"height": chkDimensions[chkDimensions.length - 1]
+		}}});
 		// fixed image sizes
 		if (options.fixedImageSize)
 		{
 			var imgDimensions = options.fixedImageSize.split(" ");
-			options.styles["span.imgCheckbox img"]["width"] = imgDimensions[0];
-			options.styles["span.imgCheckbox img"]["height"] = imgDimensions[imgDimensions.length - 1];
+			$.extend(true, $_options,{ "styles": { "span.imgCheckbox img": {
+				"width": imgDimensions[0],
+				"height": imgDimensions[imgDimensions.length - 1]
+			}}});
 		}
 		// extend with grayscale for the selected images (if set to true)
 		if (options.graySelected)
-			$.extend(true, options.styles, grayscaleStyles);
+			$.extend(true, $_options.styles, grayscaleStyles);
 		//extend with scale styles (if set to true)
 		if (options.scaleSelected)
-			$.extend(true, options.styles, scaleStyles);
+			$.extend(true, $_options.styles, scaleStyles);
 		//extend with scale styles (if set to true)
 		if (options.scaleCheckMark)
-			$.extend(true, options.styles, scaleCheckMarkStyles);
+			$.extend(true, $_options.styles, scaleCheckMarkStyles);
 		//extend with scale styles (if set to true)
 		if (options.fadeCheckMark)
-			$.extend(true, options.styles, fadeCheckMarkStyles);
+			$.extend(true, $_options.styles, fadeCheckMarkStyles);
+
+		$_options.styles = $.extend(true, {}, defaultStyles, $_options.styles, options.styles)
 
 		//Now that we've built up our styles, inject them
-		injectStylesheet(options.styles, id);
+		injectStylesheet($_options.styles, id);
 
 
 		/* *** DOM STUFF *** */
@@ -128,52 +133,17 @@
 
 	/* Init */
 	$.fn.imgCheckboxes = function(options){
-        var opts = $.extend(true, {}, $.fn.imgCheckboxes.defaults, options);
         if ($(this).data("imgCheckboxId"))
         	return $.fn.imgCheckboxes.instances[$(this).data("imgCheckboxId") - 1]
         else
         {
-        	var $that = new imgCheckboxClass($(this), opts, $.fn.imgCheckboxes.instances.length)
+        	var $that = new imgCheckboxClass($(this), $.extend(true, {}, $.fn.imgCheckboxes.defaults, options), $.fn.imgCheckboxes.instances.length)
         	$(this).data("imgCheckboxId", $.fn.imgCheckboxes.instances.push($that));
 	        return $that;
         }
 	}
 	$.fn.imgCheckboxes.instances = [];
 	$.fn.imgCheckboxes.defaults = {
-		"styles": {
-			"span.imgCheckbox img": {
-				"display": "block",
-				"margin": "0",
-				"padding": "0",
-				"transition-duration": "300ms",
-			},
-			"span.imgCheckbox": {
-				"user-select": "none",
-				"padding": "0",
-				"margin": "5px",
-				"display": "inline-block",
-				"border": "1px solid transparent",
-				"transition-duration": "300ms"
-			},
-			"span.imgCheckbox.imgChked": {
-				"border-color": "#ccc"
-			},
-			"span.imgCheckbox::before": {
-				"display": "block",
-				"background-size": "100% 100%",
-				"content": "''",
-				"color": "white",
-				"font-weight": "bold",
-				"border-radius": "50%",
-				"position": "absolute",
-				"margin": "0.5%",
-				"z-index": "1",
-				"text-align": "center",
-				"transition-duration": "300ms"
-			},
-			"span.imgCheckbox.imgChked::before": {
-			}
-		},
 		"checkMarkImage": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtMzQ2LjM4NCkiPjxwYXRoIGZpbGw9IiMxZWM4MWUiIGZpbGwtb3BhY2l0eT0iLjgiIGQ9Ik0zMiAzNDYuNGEzMiAzMiAwIDAgMC0zMiAzMiAzMiAzMiAwIDAgMCAzMiAzMiAzMiAzMiAwIDAgMCAzMi0zMiAzMiAzMiAwIDAgMC0zMi0zMnptMjEuMyAxMC4zbC0yNC41IDQxTDkuNSAzNzVsMTcuNyA5LjYgMjYtMjh6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTkuNSAzNzUuMmwxOS4zIDIyLjQgMjQuNS00MS0yNiAyOC4yeiIvPjwvZz48L3N2Zz4=",
 		"graySelected": true,
 		"scaleSelected": true,
@@ -181,6 +151,42 @@
 		"checkMarkSize": "30px",
 		"scaleCheckMark": true,
 		"fadeCheckMark": false,
-	}
+	};
+	var defaultStyles = {
+		"span.imgCheckbox img": {
+			"display": "block",
+			"margin": "0",
+			"padding": "0",
+			"transition-duration": "300ms",
+		},
+		"span.imgCheckbox.imgChked img": {
+		},
+		"span.imgCheckbox": {
+			"user-select": "none",
+			"padding": "0",
+			"margin": "5px",
+			"display": "inline-block",
+			"border": "1px solid transparent",
+			"transition-duration": "300ms"
+		},
+		"span.imgCheckbox.imgChked": {
+			"border-color": "#ccc"
+		},
+		"span.imgCheckbox::before": {
+			"display": "block",
+			"background-size": "100% 100%",
+			"content": "''",
+			"color": "white",
+			"font-weight": "bold",
+			"border-radius": "50%",
+			"position": "absolute",
+			"margin": "0.5%",
+			"z-index": "1",
+			"text-align": "center",
+			"transition-duration": "300ms"
+		},
+		"span.imgCheckbox.imgChked::before": {
+		}
+	};
 
 })( jQuery );
