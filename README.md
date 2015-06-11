@@ -16,7 +16,7 @@ You can have mulitple sets of imgCheckboxes with different parameters
 
 Option | Type | Values
 ---|---|---
-checkMarkImage | URL | Supports anything your browser support in the `background-image` property (of a pseudo selector).*__default__: SVG*Data URI which draws a white tick on semi transparent green*
+checkMarkImage | URL | Supports anything your browser support in the `background-image` property (of a pseudo selector).*__default__: SVG Data URI which draws a white tick on semi transparent green*
 graySelected | Boolean | Convenience option: Adds the necessary CSS rules to apply a grayscale filter on selected images. *__default__: true*
 scaleSelected | Boolean | Convenience option: Adds the necessary CSS rules to apply a downscaling filter on selected images. *__default__: true*
 fixedImageSize | String/Boolean | Sets a fixed image size to all images (useful if images vary in size). Values can be "200px" or "120px 200px" (not percentages). *__default__: false*
