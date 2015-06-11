@@ -3,14 +3,18 @@
 
 ## Usage
 
-Very simply, you can call `imgCheckboxes` on any jQuery collection containing `<img>` elements.
+You can call `imgCheckboxes` without any parameters on any jQuery collection containing `<img>` elements.
 
-    $("img.checkable").imgCheckboxes();
+```JavaScript
+$("img.checkable").imgCheckboxes();
+```
 
 You can have mulitple sets of imgCheckboxes with different parameters
 
-    $("img.checkableGroup1").imgCheckboxes();
-    $("img.checkableGroup2").imgCheckboxes({ "graySelected": false });
+```JavaScript
+$("img.checkableGroup1").imgCheckboxes();
+$("img.checkableGroup2").imgCheckboxes({ "graySelected": false });
+```
 
 ## Options
 
@@ -29,20 +33,22 @@ styles | Object | For advanced customisation, the full stylesheet is applied usi
 
 You can add any custom styles using the `styles` option. For example, to add a blur filter to selected images:
 
-	$("img").imgCheckboxes({
-		"styles": {
-			"span.imgCheckbox.imgChked img": {
-				// This property will overwrite the default grayscaling, we need to add it back in
-				"filter": "blur(5px) grayscale(50%)",
+```JavaScript
+$("img").imgCheckboxes({
+	"styles": {
+		"span.imgCheckbox.imgChked img": {
+			// This property will overwrite the default grayscaling, we need to add it back in
+			"filter": "blur(5px) grayscale(50%)",
 
-				// This is just css: remember compatibility
-				"-webkit-filter": "blur(5px) grayscale(50%)",
+			// This is just css: remember compatibility
+			"-webkit-filter": "blur(5px) grayscale(50%)",
 
-				// Let's change the amount of scaling from the default of "0.8"
-				"transform": "scale(0.9)"
-			}
+			// Let's change the amount of scaling from the default of "0.8"
+			"transform": "scale(0.9)"
 		}
-	});
+	}
+});
+```
 
 ## Compatibility
 
