@@ -1,19 +1,19 @@
 # Description
-**imgCheckboxes** is a jQuery plugin that makes img tags checkable much like Google's recaptcha image selection tool.
+**imgCheckbox** is a jQuery plugin that makes img tags checkable much like Google's recaptcha image selection tool.
 
 ## Usage
 
-You can call `imgCheckboxes` without any parameters on any jQuery collection containing `<img>` elements.
+You can call `imgCheckbox` without any parameters on any jQuery collection containing `<img>` elements.
 
 ```JavaScript
-$("img.checkable").imgCheckboxes();
+$("img.checkable").imgCheckbox();
 ```
 
 You can have mulitple sets of imgCheckboxes with different parameters
 
 ```JavaScript
-$("img.checkableGroup1").imgCheckboxes();
-$("img.checkableGroup2").imgCheckboxes({ "graySelected": false });
+$("img.checkableGroup1").imgCheckbox();
+$("img.checkableGroup2").imgCheckbox({ "graySelected": false });
 ```
 
 ## Options
@@ -34,7 +34,7 @@ styles | Object | For advanced customisation, the full stylesheet is applied usi
 You can add any custom styles using the `styles` option. For example, to add a blur filter to selected images:
 
 ```JavaScript
-$("img").imgCheckboxes({
+$("img").imgCheckbox({
 	"styles": {
 		"span.imgCheckbox.imgChked img": {
 			// This property will overwrite the default grayscaling, we need to add it back in

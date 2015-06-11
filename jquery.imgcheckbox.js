@@ -1,7 +1,7 @@
 /*
- * imgCheckbox
+ * imgCheckboxes
  *
- * Version: 0.3
+ * Version: 0.2
  * License: GPLv2
  * Author:  James Cuénod
  * Last Modified: 2015.06.11
@@ -134,16 +134,16 @@
 	/* Init */
 	$.fn.imgCheckbox = function(options){
         if ($(this).data("imgCheckboxId"))
-        	return $.fn.imgCheckbox.instances[$(this).data("imgCheckboxId") - 1]
+        	return $.fn.imgCheckboxes.instances[$(this).data("imgCheckboxId") - 1]
         else
         {
-        	var $that = new imgCheckboxClass($(this), $.extend(true, {}, $.fn.imgCheckbox.defaults, options), $.fn.imgCheckbox.instances.length)
-        	$(this).data("imgCheckboxId", $.fn.imgCheckbox.instances.push($that));
+        	var $that = new imgCheckboxClass($(this), $.extend(true, {}, $.fn.imgCheckboxes.defaults, options), $.fn.imgCheckboxes.instances.length)
+        	$(this).data("imgCheckboxId", $.fn.imgCheckboxes.instances.push($that));
 	        return $that;
         }
 	}
-	$.fn.imgCheckbox.instances = [];
-	$.fn.imgCheckbox.defaults = {
+	$.fn.imgCheckboxes.instances = [];
+	$.fn.imgCheckboxes.defaults = {
 		"checkMarkImage": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtMzQ2LjM4NCkiPjxwYXRoIGZpbGw9IiMxZWM4MWUiIGZpbGwtb3BhY2l0eT0iLjgiIGQ9Ik0zMiAzNDYuNGEzMiAzMiAwIDAgMC0zMiAzMiAzMiAzMiAwIDAgMCAzMiAzMiAzMiAzMiAwIDAgMCAzMi0zMiAzMiAzMiAwIDAgMC0zMi0zMnptMjEuMyAxMC4zbC0yNC41IDQxTDkuNSAzNzVsMTcuNyA5LjYgMjYtMjh6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTkuNSAzNzUuMmwxOS4zIDIyLjQgMjQuNS00MS0yNiAyOC4yeiIvPjwvZz48L3N2Zz4=",
 		"graySelected": true,
 		"scaleSelected": true,
