@@ -8,8 +8,6 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-		<script src="/js/imgCheckboxes.jquery.js"></script>
 	</head>
 	<body id="top">
 
@@ -18,14 +16,14 @@
 				<div class="content">
 					<h1><a href="#">imgCheckbox</a></h1>
 					<p class="subtitle">Toggle the internet</p>
-					<p>jQuery plugin that makes &lt;img&gt; tags checkable<br />
-					Find it on <a href="https://github.com/jcuenod/imgCheckboxes/">github</a> and click →</p>
+					<p>jQuery plugin that makes <code>img</code> tags checkable<br />
+					Find it on <a href="https://github.com/jcuenod/imgCheckboxes/">github</a> and click here →</p>
 					<ul class="actions">
 						<li><a href="https://github.com/jcuenod/imgCheckboxes/" class="button special icon fa-download">Download</a></li>
 						<li><a href="#one" class="button icon fa-chevron-down scrolly">Learn More</a></li>
 					</ul>
 				</div>
-				<div class="image"><div class="inner"><img src="images/screen.jpg" alt="" /></div></div>
+				<div class="image"><div class="inner"><img src="images/screen.jpg" /></div></div>
 			</header>
 
 		<!-- One -->
@@ -91,7 +89,7 @@
 			</section>
 
 		<!-- Four -->
-		<!--
+		
 			<section id="four" class="wrapper">
 				<div class="inner">
 
@@ -409,7 +407,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 				</div>
 			</section>
-		-->
+		
 
 		<!-- Footer -->
 			<footer id="footer">
@@ -424,6 +422,12 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.imgCheckboxes-0.2.js"></script>
+			<script type="text/javascript">
+			$(document).ready(function(){
+				$("header img").imgCheckboxes();
+			})
+			</script>
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
