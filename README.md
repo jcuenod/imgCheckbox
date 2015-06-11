@@ -15,7 +15,7 @@ You can have mulitple sets of imgCheckboxes with different parameters
 ## Options
 
 Option | Type | Values
----|---
+---|---|---
 checkMarkImage | URL | Supports anything your browser support in the `background-image` property (of a pseudo selector).*Default: SVG Data URI which draws a white tick on semi transparent green*
 graySelected | Boolean | Convenience option: Adds the necessary CSS rules to apply a grayscale filter on selected images. *Default: true*
 scaleSelected | Boolean | Convenience option: Adds the necessary CSS rules to apply a downscaling filter on selected images. *Default: true*
