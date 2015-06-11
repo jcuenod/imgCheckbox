@@ -10,7 +10,8 @@
 (function($) {
 
 	var imgCheckboxClass = function(element, options, id) {
-		var wrapperElement, $_options = {}, grayscaleStyles = {
+		var wrapperElement, $_options = {},
+		grayscaleStyles = {
 			"span.imgCheckbox img": {
 				"transform": "scale(1)",
 				"filter": "none",
@@ -50,7 +51,7 @@
 			$.extend(true, $_options,{ "styles": { "span.imgCheckbox::before": { "background-image": "url('" + options.checkMarkImage + "')" }}});
 		// give the checkmark dimensions
 		var chkDimensions = options.checkMarkSize.split(" ");
-		$.extend(true, $_options,{ "styles": { "span.imgCheckbox::before": { 
+		$.extend(true, $_options,{ "styles": { "span.imgCheckbox::before": {
 			"width": chkDimensions[0],
 			"height": chkDimensions[chkDimensions.length - 1]
 		}}});
@@ -113,7 +114,7 @@
 		var ruleSet = "";
 		for (var property in ruleObject){
     		if (ruleObject.hasOwnProperty(property)) {
-         		 ruleSet += property + ":" + ruleObject[property] + ";";
+         		ruleSet += property + ":" + ruleObject[property] + ";";
     		}
 		}
 		return ruleSet;
@@ -174,13 +175,9 @@
 			"display": "block",
 			"background-size": "100% 100%",
 			"content": "''",
-			"color": "white",
-			"font-weight": "bold",
-			"border-radius": "50%",
 			"position": "absolute",
 			"margin": "0.5%",
 			"z-index": "1",
-			"text-align": "center",
 			"transition-duration": "300ms"
 		},
 		"span.imgCheckbox.imgChked::before": {

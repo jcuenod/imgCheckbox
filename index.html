@@ -14,24 +14,25 @@
 		<!-- Header -->
 			<header id="header">
 				<div class="content">
-					<h1><a href="#">imgCheckbox</a></h1>
+					<h1><a href="#"><span class="lowlight">jquery.</span>imgCheckbox<span class="lowlight">.js</span></a></h1>
 					<p class="subtitle">Toggle the internet</p>
-					<p>jQuery plugin that makes <code>img</code> tags checkable<br />
-					Find it on <a href="https://github.com/jcuenod/imgCheckbox/">github</a> and click here →</p>
+					<p>A jQuery plugin that makes <code>img</code> tags checkable.<br />
+					Find it on <a href="https://github.com/jcuenod/imgCheckbox/">github</a>. Try it by clicking here →</p>
 					<ul class="actions">
 						<li><a href="https://github.com/jcuenod/imgCheckbox/" class="button special icon fa-download">Download</a></li>
 						<li><a href="#one" class="button icon fa-chevron-down scrolly">Learn More</a></li>
 					</ul>
 				</div>
-				<div class="image"><div class="inner"><img src="images/screen.jpg" /></div></div>
+				<div class="image"><img src="images/screen.jpg" /></div>
 			</header>
 
 		<!-- One -->
 			<section id="one" class="wrapper style2 special">
 				<header class="major">
-					<h2>Sed ipsum magna lorem tempus amet<br />
-					vehicula et gravida elementum</h2>
+					<h2>Description</h2>
 				</header>
+				<p><b>Usage: </b><code>$("img").imgCheckbox();</code></p>
+				<p>fasdf sdf sdf sdf</p>
 				<ul class="icons major">
 					<li><span class="icon fa-camera-retro"><span class="label">Shoot</span></span></li>
 					<li><span class="icon fa-refresh"><span class="label">Process</span></span></li>
@@ -407,16 +408,16 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 				</div>
 			</section>
-		
+
 
 		<!-- Footer -->
 			<footer id="footer">
 				<ul class="icons">
 					<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="https://twitter.com/jamescuenod" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon fa-instagram"><span class="label">Github</span></a></li>
 				</ul>
-				<p class="copyright">&copy; Untitled. Credits: <a href="http://html5up.net">HTML5 UP</a></p>
+				<p class="copyright">Copyright &copy; 2015. James Cuénod. Credits: <a href="http://html5up.net">HTML5 UP</a></p>
 			</footer>
 
 		<!-- Scripts -->
@@ -425,7 +426,21 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/jquery.imgcheckbox.js"></script>
 			<script type="text/javascript">
 			$(document).ready(function(){
-				$("header img").imgCheckbox();
+				$("header img").imgCheckbox({
+					"styles": {
+						"span.imgCheckbox img": {
+							"border-radius": "6px"
+						},
+						"span.imgCheckbox.imgChked img": {
+							"transform": "scale(0.95)",
+						},
+						"span.imgCheckbox": {
+							"border": "none",
+						}
+					},
+					"checkMarkSize": "40px",
+					// "checkMarkImage": "http://findicons.com/files/icons/1964/colorcons_green/128/checkmark.png"
+				});
 			})
 			</script>
 			<script src="assets/js/skel.min.js"></script>

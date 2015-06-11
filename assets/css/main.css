@@ -2313,11 +2313,6 @@
 		overflow: hidden;
 	}
 
-		.image img {
-			border-radius: 6px;
-			display: block;
-		}
-
 		.image.left, .image.right {
 			max-width: 40%;
 		}
@@ -2696,12 +2691,6 @@
 			margin: 0 3em 0 0;
 			display: block;
 		}
-
-			.spotlight .image img {
-				display: block;
-				border-radius: 100%;
-				width: 100%;
-			}
 
 		.spotlight .content {
 			width: 70%;
@@ -3570,6 +3559,11 @@
 		height: 100vh;
 		min-height: 35em;
 	}
+		#header h1 .lowlight {
+			color: #ccc;
+			font-size: 70%;
+			opacity: 0.5;
+		}
 
 		#header input[type="submit"],
 		#header input[type="reset"],
@@ -3684,23 +3678,8 @@
 
 		#header .image {
 			box-shadow: 0 0 0 4px #4696e5, 0 0 0 5px rgba(255, 255, 255, 0.25);
+			margin-top: -2em;
 		}
-
-			#header .image.phone {
-				box-shadow: none;
-			}
-
-				#header .image.phone .inner, #header .image.phone:before, #header .image.phone:after {
-					border-color: rgba(255, 255, 255, 0.25);
-				}
-
-				#header .image.phone .inner:before {
-					background: rgba(255, 255, 255, 0.25);
-				}
-
-				#header .image.phone .inner:after {
-					border-color: rgba(255, 255, 255, 0.25);
-				}
 
 		#header ul.alt > li {
 			border-top-color: rgba(255, 255, 255, 0.25);
@@ -3809,18 +3788,6 @@
 			transform: translateY(0);
 			opacity: 1;
 		}
-
-			#header .image img {
-				-moz-transition: opacity 0.75s ease;
-				-webkit-transition: opacity 0.75s ease;
-				-ms-transition: opacity 0.75s ease;
-				transition: opacity 0.75s ease;
-				-moz-transition-delay: 0.75s;
-				-webkit-transition-delay: 0.75s;
-				-ms-transition-delay: 0.75s;
-				transition-delay: 0.75s;
-				opacity: 1;
-			}
 
 		@media screen and (max-width: 1280px) {
 
@@ -3961,10 +3928,6 @@
 			transform: translateY(4em);
 			opacity: 0;
 		}
-
-			body.is-loading #header .image img {
-				opacity: 0;
-			}
 
 	@media screen and (max-width: 980px) and (orientation: portrait) {
 
