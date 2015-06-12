@@ -91,19 +91,24 @@
 
 		/* *** INJECT INTO FORM *** */
 		forminjection: if (options.addToForm != false) {
-			if (options.addToForm !instanceof jQuery){
-				options.addToForm = $(this).closest("form");
+			if (!(options.addToForm instanceof jQuery)) {
+				options.addToForm = $(element).closest("form");
 				if (options.addToForm.length == 0)
 					break forminjection;
 			}
-			var imgName = img.attr("name");
-			imgName = (typeof imgName != "undefined") ? imgName : $("img").first().attr("src").match(/\/(.*)\.[\w]+$/)[1];
-			var that = this;
 			options.addToForm.submit(function(eventObj) {
-				$('<input />').attr('type', 'hidden')
-					.attr('name', imgName)
-					.prop("checked", true)
-					.appendTo(this);
+				var that = this;
+				$(element).each(function(){
+					if (!$(this).parent(".imgCheckbox" + id).hasClass("imgChked"))
+						return;
+					var imgName = $(this).attr("name");
+					imgName = (typeof imgName != "undefined") ? imgName : $(this).attr("src").match(/\/(.*)\.[\w]+$/)[1];
+					$('<input />').attr('type', 'hidden')
+						.attr('name', imgName)
+						.prop("value", true)
+						.appendTo(that);
+				});
+				console.log( $( this ).serialize() );
 				return true;
 			})
 		}
@@ -169,7 +174,7 @@
 		"checkMarkSize": "30px",
 		"scaleCheckMark": true,
 		"fadeCheckMark": false,
-		"addToForm", true,
+		"addToForm": true,
 	};
 	var defaultStyles = {
 		"span.imgCheckbox img": {
