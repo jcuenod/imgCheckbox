@@ -1,10 +1,10 @@
 /*
  * imgCheckbox
  *
- * Version: 0.3.2
+ * Version: 0.3.3
  * License: GPLv2
  * Author:  James Cuénod
- * Last Modified: 2015.06.12
+ * Last Modified: 2015.06.13
  *
  */
 (function($) {
@@ -88,7 +88,7 @@
 		wrapperElement.click(function() {
 			$(this).toggleClass("imgChked");
 			if (options.addToForm)
-				$( $(this).data("hiddenElementId") ).prop("checked", $(this).hasClass("imgChked"));
+				$( "." + $(this).data("hiddenElementId") ).prop("checked", $(this).hasClass("imgChked"));
 		});
 
 		/* *** INJECT INTO FORM *** */
@@ -103,12 +103,12 @@
 			}
 			$(element).each(function(index){
 				var hiddenElementId = "hEI" + id + "-" + index;
-				$(this).data('hiddenElementId', hiddenElementId);
+				$(this).parent().data('hiddenElementId', hiddenElementId);
 				var imgName = $(this).attr("name");
 				imgName = (typeof imgName != "undefined") ? imgName : $(this).attr("src").match(/\/(.*)\.[\w]+$/)[1];
 				$('<input />').attr('type', 'checkbox')
 					.attr('name', imgName)
-					.prop("value", false)
+					.addClass(hiddenElementId)
 					.css("display", "none")
 					.appendTo(options.addToForm);
 			});
