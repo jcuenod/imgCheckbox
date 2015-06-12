@@ -23,10 +23,11 @@ Option | Type | Values | Default
 checkMarkImage | URL | Supports anything your browser support in the `background-image` property (of a pseudo selector). | SVG Data URI which draws a white tick on semi transparent green.
 graySelected | Boolean | Convenience option: Adds the necessary CSS rules to apply a grayscale filter on selected images. | true
 scaleSelected | Boolean | Convenience option: Adds the necessary CSS rules to apply a downscaling filter on selected images. | true
-fixedImageSize | String/Boolean | Sets a fixed image size to all images (useful if images vary in size). Values can be "200px" or "120px 200px" (not percentages). | false
-checkMarkSize | String/Boolean | Sets a custom size for the image (Useful if your images are very large or very small and the default is not suitable). Values can be "30px" and "20px 30px" (note: percentages do not work). | "30px"
+fixedImageSize | Boolean / String | Sets a fixed image size to all images (useful if images vary in size). Values can be "200px" or "120px 200px" (not percentages). | false
+checkMarkSize | Boolean / String | Sets a custom size for the image (Useful if your images are very large or very small and the default is not suitable). Values can be "30px" and "20px 30px" (note: percentages do not work). | "30px"
 scaleCheckMark | Boolean | Convenience option: Adds the necessary CSS rules to apply a zooming effect on the checkmark as it appears and disappears. | true
 fadeCheckMark | Boolean | Convenience option: Adds the necessary CSS rules to fade the checkmark in and out. | false
+addToForm | Boolean / jQuery | imgCheckbox can inject the checked elements into the form. If `true`, imgCheckbox will find a parent form and hook into its submission. A jQuery object can be passed in and the `submit` listener will attach to it. | true
 styles | Object | For advanced customisation, the full stylesheet is applied using this object. | (see source)
 
 ## Advanced
