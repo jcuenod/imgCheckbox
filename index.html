@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Fractal by HTML5 UP</title>
+		<title>imgCheckbox | a jQuery plugin that makes img tags checkable</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -20,28 +20,73 @@
 					Find it on <a href="https://github.com/jcuenod/imgCheckbox/">github</a>. Try it by clicking here →</p>
 					<ul class="actions">
 						<li><a href="https://github.com/jcuenod/imgCheckbox/" class="button special icon fa-download">Download</a></li>
-						<li><a href="#one" class="button icon fa-chevron-down scrolly">Learn More</a></li>
+						<li><a href="#basicusage" class="button icon fa-chevron-down scrolly">Learn More</a></li>
 					</ul>
 				</div>
 				<div class="image"><img src="images/screen.jpg" /></div>
 			</header>
 
 		<!-- One -->
-			<section id="one" class="wrapper style2 special">
+			<section id="basicusage" class="wrapper style2 special">
 				<header class="major">
-					<h2>Description</h2>
+					<h2>Basic Usage</h2>
 				</header>
-				<p><b>Usage: </b><code>$("img").imgCheckbox();</code></p>
-				<p>fasdf sdf sdf sdf</p>
-				<ul class="icons major">
-					<li><span class="icon fa-camera-retro"><span class="label">Shoot</span></span></li>
-					<li><span class="icon fa-refresh"><span class="label">Process</span></span></li>
-					<li><span class="icon fa-cloud"><span class="label">Upload</span></span></li>
-				</ul>
+				<p>You can call <b>imgCheckbox</b> without any parameters on any jQuery collection containing <code>img</code> elements.</p>
+				<p><code>$("img").imgCheckbox();</code></p>
+				<p class="exampleone"><img src="images/image1.jpg" alt=""><span class="spacer"></span><img src="images/image2.jpg" alt=""><span class="spacer"></span><img src="images/image3.jpg" alt=""></p>
+			</section>
+
+			<section id="options" class="wrapper">
+				<header class="major">
+					<h2>Options</h2>
+				</header>
+				<div class="inner alt">
+					<table class="alt">
+						<thead>
+							<th>Option</th><th>Type</th><th>Values</th><th>Default</th>
+						</thead>
+						<tbody>
+							<tr><td>checkMarkImage</td><td>URL</td><td>Supports anything your browser support in the `background-image` property (of a pseudo selector).</td><td>SVG Data URI which draws a white tick on semi transparent green.</td></tr>
+							<tr><td>graySelected</td><td>Boolean</td><td>Convenience option: Adds the necessary CSS rules to apply a grayscale filter on selected images.</td><td>true</td></tr>
+							<tr><td>scaleSelected</td><td>Boolean</td><td>Convenience option: Adds the necessary CSS rules to apply a downscaling filter on selected images.</td><td>true</td></tr>
+							<tr><td>fixedImageSize</td><td>String / Boolean</td><td>Sets a fixed image size to all images (useful if images vary in size). Values can be "200px" or "120px 200px" (not percentages).</td><td>false</td></tr>
+							<tr><td>checkMarkSize</td><td>String / Boolean</td><td>Sets a custom size for the image (Useful if your images are very large or very small and the default is not suitable). Values can be "30px" and "20px 30px" (note: percentages do not work).</td><td>30px</td></tr>
+							<tr><td>scaleCheckMark</td><td>Boolean</td><td>Convenience option: Adds the necessary CSS rules to apply a zooming effect on the checkmark as it appears and disappears.</td><td>true</td></tr>
+							<tr><td>fadeCheckMark</td><td>Boolean</td><td>Convenience option: Adds the necessary CSS rules to fade the checkmark in and out.</td><td>false</td></tr>
+							<tr><td>styles</td><td>Object</td><td>For advanced customisation, the full stylesheet is applied using this object.</td><td>(see source)</td></tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<section id="advanced" class="wrapper style2 special">
+				<header class="major">
+					<h2>Advanced Usage</h2>
+				</header>
+				<div class="inner">
+					<section>
+						<p>Advanced customisation can be achieved by applying styles through the <code>styles</code> option.<br />For example, to add a blur filter to selected images the following code could be used.</p>
+						<pre><code style="text-align: left">$("img").imgCheckbox({
+    "styles": {
+        "span.imgCheckbox.imgChked img": {
+            // This property will overwrite the default grayscaling, we need to add it back in
+            "filter": "blur(5px) grayscale(50%)",
+
+            // This is just css: remember compatibility
+            "-webkit-filter": "blur(5px) grayscale(50%)",
+
+            // Let's change the amount of scaling from the default of "0.8"
+            "transform": "scale(0.9)"
+        }
+    }
+});</code></pre>
+						<p class="exampleone"><img src="images/image1.jpg" alt=""><span class="spacer"></span><img src="images/image2.jpg" alt=""><span class="spacer"></span><img src="images/image3.jpg" alt=""></p>
+					</section>
+				</div>
 			</section>
 
 		<!-- Two -->
-			<section id="two" class="wrapper">
+			<section id="twotwo" class="wrapper">
 				<div class="inner alt">
 					<section class="spotlight">
 						<div class="image"><img src="images/pic01.jpg" alt="" /></div>
@@ -413,12 +458,22 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		<!-- Footer -->
 			<footer id="footer">
 				<ul class="icons">
-					<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="https://stackoverflow.com/users/123415/jcuenod" class="icon fa-stack-overflow"><span class="label">Stack Overflow</span></a></li>
 					<li><a href="https://twitter.com/jamescuenod" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon fa-instagram"><span class="label">Github</span></a></li>
+					<li><a href="https://github.com/jcuenod" class="icon fa-github"><span class="label">Github</span></a></li>
 				</ul>
 				<p class="copyright">Copyright &copy; 2015. James Cuénod. Credits: <a href="http://html5up.net">HTML5 UP</a></p>
 			</footer>
+
+		<!-- HeaderMenu -->
+			<navigation id="headermenu">
+				<ul class="actions">
+					<li><a href="#basicusage" class=" scrolly">Basic Usage</a></li>
+					<li><a href="#multiple" class="scrolly">Mulitple Instances</a></li>
+					<li><a href="#options" class="scrolly">Options</a></li>
+					<li><a href="#advanced" class="scrolly">Advanced Usage</a></li>
+				</ul>
+			</navigation>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -441,6 +496,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 					"checkMarkSize": "40px",
 					// "checkMarkImage": "http://findicons.com/files/icons/1964/colorcons_green/128/checkmark.png"
 				});
+				$(".exampleone img").imgCheckbox();
 			})
 			</script>
 			<script src="assets/js/skel.min.js"></script>

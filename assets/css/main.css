@@ -2302,15 +2302,17 @@
 	.icon {
 		color: #e0e0e0;
 	}
-
 /* Image */
 
 	.image {
 		border-radius: 6px;
 		border: 0;
-		display: inline-block;
+		display: block;
 		position: relative;
 		overflow: hidden;
+	}
+	.image span[class^='imgCheckbox'] {
+		display: block !important;
 	}
 
 		.image.left, .image.right {
@@ -2843,7 +2845,7 @@
 /* Wrapper */
 
 	.wrapper {
-		padding: 4.5em 0 2.5em 0 ;
+		padding: 5.5em 0 2.5em 0 ;
 		background-color: #ffffff;
 		border-bottom: solid 2px #eeeeee;
 	}
@@ -4037,3 +4039,14 @@
 		}
 
 	}
+
+#headermenu a {
+	padding: 1.5em 1em;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+.spacer {
+	display: inline-block;
+	width: 1.5em;
+}
