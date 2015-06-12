@@ -4088,3 +4088,7 @@
 	display: inline-block;
 	width: 1.5em;
 }
+
+code.formoutput {
+	color: #f55;
+}
