@@ -60,14 +60,60 @@
 							<th>Option</th><th>Type</th><th>Values</th><th>Default</th>
 						</thead>
 						<tbody>
-							<tr><td>checkMarkImage</td><td>URL</td><td>Supports anything your browser support in the `background-image` property (of a pseudo selector).</td><td>SVG Data URI which draws a white tick on semi transparent green.</td></tr>
-							<tr><td>graySelected</td><td>Boolean</td><td>Convenience option: Adds the necessary CSS rules to apply a grayscale filter on selected images.</td><td>true</td></tr>
-							<tr><td>scaleSelected</td><td>Boolean</td><td>Convenience option: Adds the necessary CSS rules to apply a downscaling filter on selected images.</td><td>true</td></tr>
-							<tr><td>fixedImageSize</td><td>String / Boolean</td><td>Sets a fixed image size to all images (useful if images vary in size). Values can be "200px" or "120px 200px" (not percentages).</td><td>false</td></tr>
-							<tr><td>checkMarkSize</td><td>String / Boolean</td><td>Sets a custom size for the image (Useful if your images are very large or very small and the default is not suitable). Values can be "30px" and "20px 30px" (note: percentages do not work).</td><td>30px</td></tr>
-							<tr><td>scaleCheckMark</td><td>Boolean</td><td>Convenience option: Adds the necessary CSS rules to apply a zooming effect on the checkmark as it appears and disappears.</td><td>true</td></tr>
-							<tr><td>fadeCheckMark</td><td>Boolean</td><td>Convenience option: Adds the necessary CSS rules to fade the checkmark in and out.</td><td>false</td></tr>
-							<tr><td>styles</td><td>Object</td><td>For advanced customisation, the full stylesheet is applied using this object.</td><td>(see source)</td></tr>
+							<tr>
+								<td>checkMarkImage</td>
+								<td>URL</td>
+								<td>Supports anything your browser support in the `background-image` property (of a pseudo selector).</td>
+								<td>SVG Data URI which draws a white tick on semi transparent green.</td>
+							</tr>
+							<tr>
+								<td>graySelected</td>
+								<td>Boolean</td>
+								<td>Convenience option: Adds the necessary CSS rules to apply a grayscale filter on selected images.</td>
+								<td>true</td>
+							</tr>
+							<tr>
+								<td>scaleSelected</td>
+								<td>Boolean</td>
+								<td>Convenience option: Adds the necessary CSS rules to apply a downscaling filter on selected images.</td>
+								<td>true</td>
+							</tr>
+							<tr>
+								<td>fixedImageSize</td>
+								<td>String / Boolean</td>
+								<td>Sets a fixed image size to all images (useful if images vary in size). Values can be "200px" or "120px 200px" (not percentages).</td>
+								<td>false</td>
+							</tr>
+							<tr>
+								<td>checkMarkSize</td>
+								<td>String / Boolean</td>
+								<td>Sets a custom size for the image (Useful if your images are very large or very small and the default is not suitable). Values can be "30px" and "20px 30px" (note: percentages do not work).</td>
+								<td>30px</td>
+							</tr>
+							<tr>
+								<td>scaleCheckMark</td>
+								<td>Boolean</td>
+								<td>Convenience option: Adds the necessary CSS rules to apply a zooming effect on the checkmark as it appears and disappears.</td>
+								<td>true</td>
+							</tr>
+							<tr>
+								<td>fadeCheckMark</td>
+								<td>Boolean</td>
+								<td>Convenience option: Adds the necessary CSS rules to fade the checkmark in and out.</td>
+								<td>false</td>
+							</tr>
+							<tr>
+								<td>addToForm</td>
+								<td>jQuery / Boolean</td>
+								<td> imgCheckbox can inject the checked elements into the form. If `true`, imgCheckbox will find a parent form and hook into its submission. A jQuery object can be passed in and the `submit` listener will attach to it.</td>
+								<td>true</td>
+							</tr>
+							<tr>
+								<td>styles</td>
+								<td>Object</td>
+								<td>For advanced customisation, the full stylesheet is applied using this object.</td>
+								<td>(see source)</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -79,7 +125,7 @@
 				</header>
 				<div class="inner">
 					<section>
-						<p>Advanced customisation can be achieved by applying styles through the <code>styles</code> option.<br />For example, to add a blur filter to selected images the following code could be used.</p>
+						<p>Advanced customisation can be achieved by applying styles through the <code>styles</code> option.<br />Want to add a fancy CSS3 blur filter to selected images? No Problem...</p>
 						<pre><code style="text-align: left">$("img").imgCheckbox({
     "styles": {
         "span.imgCheckbox.imgChked img": {
@@ -526,7 +572,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				    }
 				});
 				$(".exampleone").submit(function() {
-					$("body").css({"opacity": 0}).animate({"opacity": 1}, "medium");
+					$("body").css({"opacity": 0}).animate({"opacity": 1}, "fast");
 					$(".formoutput").text($(this).serialize());
 					return false;
 				})
