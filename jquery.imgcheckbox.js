@@ -96,8 +96,9 @@
 				if (options.addToForm.length == 0)
 					break forminjection;
 			}
-			var imgName = img.attr("name")
-			var that = this
+			var imgName = img.attr("name");
+			imgName = (typeof imgName != "undefined") ? imgName : $("img").first().attr("src").match(/\/(.*)\.[\w]+$/)[1];
+			var that = this;
 			options.addToForm.submit(function(eventObj) {
 				$('<input />').attr('type', 'hidden')
 					.attr('name', imgName)
