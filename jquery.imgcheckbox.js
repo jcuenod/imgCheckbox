@@ -1,7 +1,7 @@
 /*
  * imgCheckbox
  *
- * Version: 0.3
+ * Version: 0.3.1
  * License: GPLv2
  * Author:  James Cuénod
  * Last Modified: 2015.06.11
@@ -10,7 +10,7 @@
 (function($) {
 
 	var imgCheckboxClass = function(element, options, id) {
-		var wrapperElement, $_options = {}, grayscaleStyles = {
+		var wrapperElement, $finalStyles = {}, grayscaleStyles = {
 			"span.imgCheckbox img": {
 				"transform": "scale(1)",
 				"filter": "none",
@@ -47,39 +47,39 @@
 		/* *** STYLESHEET STUFF *** */
 		// shove in the custom check mark
 		if (options.checkMarkImage != false)
-			$.extend(true, $_options,{ "styles": { "span.imgCheckbox::before": { "background-image": "url('" + options.checkMarkImage + "')" }}});
+			$.extend(true, $finalStyles, { "span.imgCheckbox::before": { "background-image": "url('" + options.checkMarkImage + "')" }});
 		// give the checkmark dimensions
 		var chkDimensions = options.checkMarkSize.split(" ");
-		$.extend(true, $_options,{ "styles": { "span.imgCheckbox::before": { 
+		$.extend(true, $finalStyles, { "span.imgCheckbox::before": {
 			"width": chkDimensions[0],
 			"height": chkDimensions[chkDimensions.length - 1]
-		}}});
+		}});
 		// fixed image sizes
 		if (options.fixedImageSize)
 		{
 			var imgDimensions = options.fixedImageSize.split(" ");
-			$.extend(true, $_options,{ "styles": { "span.imgCheckbox img": {
+			$.extend(true, $finalStyles,{ "span.imgCheckbox img": {
 				"width": imgDimensions[0],
 				"height": imgDimensions[imgDimensions.length - 1]
-			}}});
+			}});
 		}
 		// extend with grayscale for the selected images (if set to true)
 		if (options.graySelected)
-			$.extend(true, $_options.styles, grayscaleStyles);
+			$.extend(true, $finalStyles, grayscaleStyles);
 		//extend with scale styles (if set to true)
 		if (options.scaleSelected)
-			$.extend(true, $_options.styles, scaleStyles);
+			$.extend(true, $finalStyles, scaleStyles);
 		//extend with scale styles (if set to true)
 		if (options.scaleCheckMark)
-			$.extend(true, $_options.styles, scaleCheckMarkStyles);
+			$.extend(true, $finalStyles, scaleCheckMarkStyles);
 		//extend with scale styles (if set to true)
 		if (options.fadeCheckMark)
-			$.extend(true, $_options.styles, fadeCheckMarkStyles);
+			$.extend(true, $finalStyles, fadeCheckMarkStyles);
 
-		$_options.styles = $.extend(true, {}, defaultStyles, $_options.styles, options.styles)
+		$finalStyles = $.extend(true, {}, defaultStyles, $finalStyles, options.styles)
 
 		//Now that we've built up our styles, inject them
-		injectStylesheet($_options.styles, id);
+		injectStylesheet($finalStyles, id);
 
 
 		/* *** DOM STUFF *** */
@@ -88,6 +88,25 @@
 		wrapperElement.click(function() {
 			$(this).toggleClass("imgChked");
 		});
+
+		/* *** INJECT INTO FORM *** */
+		forminjection: if (options.addToForm != false) {
+			if (options.addToForm !instanceof jQuery){
+				options.addToForm = $(this).closest("form");
+				if (options.addToForm.length == 0)
+					break forminjection;
+			}
+			var imgName = img.attr("name")
+			var that = this
+			options.addToForm.submit(function(eventObj) {
+				$('<input />').attr('type', 'hidden')
+					.attr('name', imgName)
+					.prop("checked", true)
+					.appendTo(this);
+				return true;
+			})
+		}
+
 		return this;
 	};
 
@@ -103,18 +122,18 @@
 		var stylesheet = document.styleSheets[document.styleSheets.length - 1];
 
 		for (var selector in stylesObject){
-    		if (stylesObject.hasOwnProperty(selector)) {
-    			compatInsertRule(stylesheet, selector, buildRules(stylesObject[selector]), id);
-    		}
+			if (stylesObject.hasOwnProperty(selector)) {
+				compatInsertRule(stylesheet, selector, buildRules(stylesObject[selector]), id);
+			}
 		}
 	}
 	function buildRules(ruleObject)
 	{
 		var ruleSet = "";
 		for (var property in ruleObject){
-    		if (ruleObject.hasOwnProperty(property)) {
-         		 ruleSet += property + ":" + ruleObject[property] + ";";
-    		}
+			if (ruleObject.hasOwnProperty(property)) {
+				 ruleSet += property + ":" + ruleObject[property] + ";";
+			}
 		}
 		return ruleSet;
 	}
@@ -131,14 +150,14 @@
 
 	/* Init */
 	$.fn.imgCheckbox = function(options){
-        if ($(this).data("imgCheckboxId"))
-        	return $.fn.imgCheckbox.instances[$(this).data("imgCheckboxId") - 1]
-        else
-        {
-        	var $that = new imgCheckboxClass($(this), $.extend(true, {}, $.fn.imgCheckbox.defaults, options), $.fn.imgCheckbox.instances.length)
-        	$(this).data("imgCheckboxId", $.fn.imgCheckbox.instances.push($that));
-	        return $that;
-        }
+		if ($(this).data("imgCheckboxId"))
+			return $.fn.imgCheckbox.instances[$(this).data("imgCheckboxId") - 1]
+		else
+		{
+			var $that = new imgCheckboxClass($(this), $.extend(true, {}, $.fn.imgCheckbox.defaults, options), $.fn.imgCheckbox.instances.length)
+			$(this).data("imgCheckboxId", $.fn.imgCheckbox.instances.push($that));
+			return $that;
+		}
 	}
 	$.fn.imgCheckbox.instances = [];
 	$.fn.imgCheckbox.defaults = {
@@ -149,6 +168,7 @@
 		"checkMarkSize": "30px",
 		"scaleCheckMark": true,
 		"fadeCheckMark": false,
+		"addToForm", true,
 	};
 	var defaultStyles = {
 		"span.imgCheckbox img": {
