@@ -3539,7 +3539,7 @@
 /* Header */
 
 	#header {
-		background-color: #4696e5;
+		background-color: #88AA99;/*#4696e5;*/
 		color: #d0e4f8;
 		padding: 4.5em 0 2.5em 0 ;
 		-moz-align-items: center;
@@ -3562,9 +3562,12 @@
 		min-height: 35em;
 	}
 		#header h1 .lowlight {
-			color: #ccc;
+			color: #EEEEDD;
 			font-size: 70%;
-			opacity: 0.5;
+			opacity: 0.4;
+		}
+		#header p {
+			color: #EEEEDD;
 		}
 
 		#header input[type="submit"],
@@ -3679,7 +3682,7 @@
 		}
 
 		#header .image {
-			box-shadow: 0 0 0 4px #4696e5, 0 0 0 5px rgba(255, 255, 255, 0.25);
+			box-shadow: 0 0 0 4px #88AA99, 0 0 0 5px rgba(255, 255, 255, 0.25);
 			margin-top: -2em;
 		}
 

@@ -69,18 +69,19 @@
 						<pre><code style="text-align: left">$("img").imgCheckbox({
     "styles": {
         "span.imgCheckbox.imgChked img": {
-            // This property will overwrite the default grayscaling, we need to add it back in
-            "filter": "blur(5px) grayscale(50%)",
+            // It's important to note that overriding the "filter" property will remove grayscaling
+            "filter": "blur(5px)",
 
             // This is just css: remember compatibility
-            "-webkit-filter": "blur(5px) grayscale(50%)",
+            "-webkit-filter": "blur(5px)",
 
             // Let's change the amount of scaling from the default of "0.8"
             "transform": "scale(0.9)"
         }
     }
 });</code></pre>
-						<p class="exampleone"><img src="images/image1.jpg" alt=""><span class="spacer"></span><img src="images/image2.jpg" alt=""><span class="spacer"></span><img src="images/image3.jpg" alt=""></p>
+						<p class="exampletwo"><img src="images/Einstein.jpg" alt=""><span class="spacer"></span><img src="images/Wagner.jpg" alt=""><span class="spacer"></span><img src="images/Tolkien.jpg" alt=""><br />
+						<img src="images/Gandhi.jpg" alt=""><span class="spacer"></span><img src="images/Tesla.jpg" alt=""><span class="spacer"></span><img src="images/Lincoln.jpg" alt=""></p>
 					</section>
 				</div>
 			</section>
@@ -493,10 +494,19 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 							"border": "none",
 						}
 					},
-					"checkMarkSize": "40px",
+					"checkMarkSize": "50px",
 					"checkMarkImage": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtMzQ2LjM4NCkiPjxwYXRoIGQ9Ik0zMiAzNDYuMzg0YTMyIDMyIDAgMCAwLTMyIDMyIDMyIDMyIDAgMCAwIDMyIDMyIDMyIDMyIDAgMCAwIDMyLTMyIDMyIDMyIDAgMCAwLTMyLTMyem0yMS4yNTYgMTAuMzI3bC0yNC40NiA0MC44OTNMOS41IDM3NS4yMTNsMTcuNjkzIDkuNjA1IDI2LjA2LTI4LjEwN3oiIGZpbGw9IiNjODAwMDAiIGZpbGwtb3BhY2l0eT0iLjc4NCIvPjxwYXRoIGQ9Ik05LjUwMiAzNzUuMjEzbDE5LjI5NCAyMi4zOSAyNC40Ni00MC44OTMtMjYuMDYgMjguMTA3eiIgZmlsbD0iI2ZmZiIvPjwvZz48L3N2Zz4="
 				});
 				$(".exampleone img").imgCheckbox();
+				$(".exampletwo img").imgCheckbox({
+				    "styles": {
+				        "span.imgCheckbox.imgChked img": {
+				            "filter": "blur(5px)",
+				            "-webkit-filter": "blur(5px)",
+				            "transform": "scale(0.9)"
+				        }
+				    }
+				});
 			})
 			/*
 $(window).scroll(function() {
