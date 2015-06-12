@@ -1,10 +1,10 @@
 /*
  * imgCheckbox
  *
- * Version: 0.3.2
+ * Version: 0.3.3
  * License: GPLv2
  * Author:  James Cuénod
- * Last Modified: 2015.06.12
+ * Last Modified: 2015.06.13
  *
  */
 (function($) {
