@@ -2845,7 +2845,7 @@
 /* Wrapper */
 
 	.wrapper {
-		padding: 5.5em 0 2.5em 0 ;
+		padding: 4.5em 0 2.5em 0 ;
 		background-color: #ffffff;
 		border-bottom: solid 2px #eeeeee;
 	}
@@ -4044,27 +4044,43 @@
 	}
 
 #headermenu {
+	background-color: rgba(238,238,221,0.1);
 	position: fixed;
 	top: 0;
-	padding-top: 1.2em;
+	padding: 0;
 	right: 0;
 	text-align: right;
 	left: 0;
-	background-color: rgba(0,0,0,0.3);
-
+	transition: background-color 1500ms ease-in-out;
 }
-#headermenu ul {
-	margin-bottom: 1.2em;
+#headermenu.scrollDown {
+	background-color: rgba(0,0,0,0.1);
 }
-
+#headermenu .lhs {
+	float: left;
+}
+#headermenu .rhs {
+	float: right;
+}
 #headermenu a {
+	float: left;
+	display: inline-block;
 	color: rgba(238,238,221,0.5);
-	padding: 1.5em 1em;
-	vertical-align: middle;
 	font-weight: bold;
 	border: none;
+	margin: 0;
+	padding: 1.2em 2em;
+	transition: padding 1s ease-in-out, color 1s ease-in-out;
 }
 #headermenu a:hover {
+	background-color: rgba(238,238,221,0.3);
+	transition: background-color 100ms ease-in-out;
+}
+#headermenu.scrollDown a {
+	padding: 0.5em 1.5em;
+	color: #88AA99;
+}
+#headermenu.scrollDown a:hover {
 	background-color: #EEEEDD;
 }
 

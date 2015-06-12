@@ -34,13 +34,20 @@
 				<p>You can call <b>imgCheckbox</b> without any parameters on any jQuery collection containing <code>img</code> elements.</p>
 				<p><code>$("img").imgCheckbox();</code></p>
 					<form class="exampleone">
-						<img src="images/image1.jpg" alt="">
-						<span class="spacer"></span>
-						<img src="images/image2.jpg" alt="">
-						<span class="spacer"></span>
-						<img src="images/image3.jpg" alt="">
+						<p>
+							<img src="images/image1.jpg" alt="">
+							<span class="spacer"></span>
+							<img src="images/image2.jpg" alt="">
+							<span class="spacer"></span>
+							<img src="images/image3.jpg" alt="">
+						</p>
+						<p>
+							<b>imgCheckbox</b> automatically attaches to a parent form (if one is present).<br />
+							The <code>submit</code> event is captured and values are injected. Hit submit to see the form serialized below.
+						</p>
 						<input type="submit" />
 					</form>
+					<pre class="formoutput">Hit submit to see the form serialized.</pre>
 			</section>
 
 			<section id="options" class="wrapper">
@@ -470,17 +477,21 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 					<li><a href="https://twitter.com/jamescuenod" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 					<li><a href="https://github.com/jcuenod" class="icon fa-github"><span class="label">Github</span></a></li>
 				</ul>
-				<p class="copyright">Copyright &copy; 2015. James Cuénod. Credits: <a href="http://html5up.net">HTML5 UP</a></p>
+				<p class="copyright">Copyright &copy; 2015. <a href="http://www.rekindle.co.za">James Cuénod</a><br />
+				Credits: <a href="http://html5up.net">HTML5 UP</a></p>
 			</footer>
 
 		<!-- HeaderMenu -->
 			<navigation id="headermenu">
-				<ul class="actions">
-					<li><a href="#basicusage" class=" scrolly">Basic Usage</a></li>
-					<!-- <li><a href="#multiple" class="scrolly">Mulitple Instances</a></li> -->
-					<li><a href="#options" class="scrolly">Options</a></li>
-					<li><a href="#advanced" class="scrolly">Advanced Usage</a></li>
-				</ul>
+				<span class="lhs">
+					<a href="https://github.com/jcuenod" class="icon fa-github"><span class="label">Github</span> Github</a>
+				</span>
+				<span class="rhs">
+					<a href="#basicusage" class=" scrolly">Basic Usage</a>
+					<!-- <a href="#multiple" class="scrolly">Mulitple Instances</a> -->
+					<a href="#options" class="scrolly">Options</a>
+					<a href="#advanced" class="scrolly">Advanced Usage</a>
+				</span>
 			</navigation>
 
 		<!-- Scripts -->
@@ -514,17 +525,20 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				        }
 				    }
 				});
+				$(".exampleone").submit(function() {
+					$("body").css({"opacity": 0}).animate({"opacity": 1}, "medium");
+					$(".formoutput").text($(this).serialize());
+					return false;
+				})
+				$(window).scroll(function() {
+				if ($(this).scrollTop() > window.innerHeight -1){
+				    $('#headermenu').addClass("scrollDown");
+				  }
+				  else{
+				    $('#headermenu').removeClass("scrollDown");
+				  }
+				});
 			})
-			/*
-$(window).scroll(function() {
-if ($(this).scrollTop() > 1){  
-    $('header').addClass("sticky");
-  }
-  else{
-    $('header').removeClass("sticky");
-  }
-});
-			*/
 			</script>
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
