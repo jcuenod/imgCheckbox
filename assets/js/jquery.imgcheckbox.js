@@ -1,10 +1,10 @@
 /*
  * imgCheckbox
  *
- * Version: 0.3.1
+ * Version: 0.3.2
  * License: GPLv2
  * Author:  James Cuénod
- * Last Modified: 2015.06.11
+ * Last Modified: 2015.06.12
  *
  */
 (function($) {
@@ -87,6 +87,8 @@
 		wrapperElement = element.parent();
 		wrapperElement.click(function() {
 			$(this).toggleClass("imgChked");
+			if (options.addToForm)
+				$( "." + $(this).data("hiddenElementId") ).prop("checked", $(this).hasClass("imgChked"));
 		});
 
 		/* *** INJECT INTO FORM *** */
@@ -94,23 +96,22 @@
 			if (!(options.addToForm instanceof jQuery)) {
 				options.addToForm = $(element).closest("form");
 				if (options.addToForm.length == 0)
+				{
+					options.addToForm = false;
 					break forminjection;
+				}
 			}
-			options.addToForm.submit(function(eventObj) {
-				var that = this;
-				$(element).each(function(){
-					if (!$(this).parent(".imgCheckbox" + id).hasClass("imgChked"))
-						return;
-					var imgName = $(this).attr("name");
-					imgName = (typeof imgName != "undefined") ? imgName : $(this).attr("src").match(/\/(.*)\.[\w]+$/)[1];
-					$('<input />').attr('type', 'hidden')
-						.attr('name', imgName)
-						.prop("value", true)
-						.appendTo(that);
-				});
-				console.log( $( this ).serialize() );
-				return true;
-			})
+			$(element).each(function(index){
+				var hiddenElementId = "hEI" + id + "-" + index;
+				$(this).parent().data('hiddenElementId', hiddenElementId);
+				var imgName = $(this).attr("name");
+				imgName = (typeof imgName != "undefined") ? imgName : $(this).attr("src").match(/\/(.*)\.[\w]+$/)[1];
+				$('<input />').attr('type', 'checkbox')
+					.attr('name', imgName)
+					.addClass(hiddenElementId)
+					.css("display", "none")
+					.appendTo(options.addToForm);
+			});
 		}
 
 		return this;
