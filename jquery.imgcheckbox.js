@@ -1,10 +1,10 @@
 /*
  * imgCheckbox
  *
- * Version: 0.3.3
+ * Version: 0.3.4
  * License: GPLv2
  * Author:  James Cuénod
- * Last Modified: 2015.06.13
+ * Last Modified: 2015.06.27
  *
  */
 (function($) {
@@ -84,7 +84,16 @@
 
 		/* *** DOM STUFF *** */
 		element.wrap("<span class='imgCheckbox" + id + "'>");
+		// preselect elements
 		wrapperElement = element.parent();
+		if (options.preselect.length > 0)
+		{
+			wrapperElement.each(function(index){
+				if (options.preselect.indexOf(index) >= 0)
+					$(this).addClass("imgChked");
+			})
+		}
+		// set up click handler
 		wrapperElement.click(function() {
 			$(this).toggleClass("imgChked");
 			if (options.addToForm)
@@ -110,6 +119,7 @@
 					.attr('name', imgName)
 					.addClass(hiddenElementId)
 					.css("display", "none")
+					.prop("checked", $(this).parent().hasClass("imgChked"))
 					.appendTo(options.addToForm);
 			});
 		}
@@ -176,6 +186,7 @@
 		"scaleCheckMark": true,
 		"fadeCheckMark": false,
 		"addToForm": true,
+		"preselect": [],
 	};
 	var defaultStyles = {
 		"span.imgCheckbox img": {
