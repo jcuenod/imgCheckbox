@@ -14,12 +14,12 @@
 			"span.imgCheckbox img": {
 				"transform": "scale(1)",
 				"filter": "none",
-				"-webkit-filter": "grayscale(0)"
+				"-webkit-filter": "grayscale(0)",
 			},
 			"span.imgCheckbox.imgChked img": {
-				//"filter": "gray", //TODO - this line probably will not work but is necessary for IE
+				// "filter": "gray", //TODO - this line probably will not work but is necessary for IE
 				"filter": "grayscale(1)",
-				"-webkit-filter": "grayscale(1)"
+				"-webkit-filter": "grayscale(1)",
 			}
 		}, scaleStyles = {
 			"span.imgCheckbox img": {
@@ -30,17 +30,17 @@
 			}
 		}, scaleCheckMarkStyles = {
 			"span.imgCheckbox::before": {
-				"transform": "scale(0)"
+				"transform": "scale(0)",
 			},
 			"span.imgCheckbox.imgChked::before": {
-				"transform": "scale(1)"
+				"transform": "scale(1)",
 			}
 		}, fadeCheckMarkStyles = {
 			"span.imgCheckbox::before": {
-				"opacity": "0"
+				"opacity": "0",
 			},
 			"span.imgCheckbox.imgChked::before": {
-				"opacity": "1"
+				"opacity": "1",
 			}
 		};
 
@@ -66,19 +66,19 @@
 		// extend with grayscale for the selected images (if set to true)
 		if (options.graySelected)
 			$.extend(true, $finalStyles, grayscaleStyles);
-		//extend with scale styles (if set to true)
+		// extend with scale styles (if set to true)
 		if (options.scaleSelected)
 			$.extend(true, $finalStyles, scaleStyles);
-		//extend with scale styles (if set to true)
+		// extend with scale styles (if set to true)
 		if (options.scaleCheckMark)
 			$.extend(true, $finalStyles, scaleCheckMarkStyles);
-		//extend with scale styles (if set to true)
+		// extend with scale styles (if set to true)
 		if (options.fadeCheckMark)
 			$.extend(true, $finalStyles, fadeCheckMarkStyles);
 
 		$finalStyles = $.extend(true, {}, defaultStyles, $finalStyles, options.styles)
 
-		//Now that we've built up our styles, inject them
+		// Now that we've built up our styles, inject them
 		injectStylesheet($finalStyles, id);
 
 
@@ -203,10 +203,10 @@
 			"margin": "5px",
 			"display": "inline-block",
 			"border": "1px solid transparent",
-			"transition-duration": "300ms"
+			"transition-duration": "300ms",
 		},
 		"span.imgCheckbox.imgChked": {
-			"border-color": "#ccc"
+			"border-color": "#ccc",
 		},
 		"span.imgCheckbox::before": {
 			"display": "block",
@@ -219,7 +219,7 @@
 			"margin": "0.5%",
 			"z-index": "1",
 			"text-align": "center",
-			"transition-duration": "300ms"
+			"transition-duration": "300ms",
 		},
 		"span.imgCheckbox.imgChked::before": {
 		}
