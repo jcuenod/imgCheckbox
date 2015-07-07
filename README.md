@@ -18,18 +18,78 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
 
 ## Options
 
-Option | Type | Values | Default
----|---|---|---|---
-checkMarkImage | URL | Supports anything your browser support in the `background-image` property (of a pseudo selector). | SVG Data URI which draws a white tick on semi transparent green.
-graySelected | Boolean | Convenience option: Adds the necessary CSS rules to apply a grayscale filter on selected images. | true
-scaleSelected | Boolean | Convenience option: Adds the necessary CSS rules to apply a downscaling filter on selected images. | true
-fixedImageSize | Boolean / String | Sets a fixed image size to all images (useful if images vary in size). Values can be "200px" or "120px 200px" (not percentages). | false
-checkMarkSize | Boolean / String | Sets a custom size for the image (Useful if your images are very large or very small and the default is not suitable). Values can be "30px" and "20px 30px" (note: percentages do not work). | "30px"
-scaleCheckMark | Boolean | Convenience option: Adds the necessary CSS rules to apply a zooming effect on the checkmark as it appears and disappears. | true
-fadeCheckMark | Boolean | Convenience option: Adds the necessary CSS rules to fade the checkmark in and out. | false
-addToForm | Boolean / jQuery | imgCheckbox can inject the checked elements into the form. If `true`, imgCheckbox will find a parent form and hook into its submission. A jQuery object can be passed in and the `submit` listener will attach to it. | true
-styles | Object | For advanced customisation, the full stylesheet is applied using this object. | (see source)
-preselect | [Integer] | To preselect certain elements, use the syntax `{ preselect: [0,1,2]}` | []
+<table>
+    <thead>
+        <tr>
+            <th>Option</th>
+            <th>Type</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>checkMarkImage</td>
+            <td>URL</td>
+            <td>Supports anything your browser support in the <code>background-image</code> property (of a pseudo selector).</td>
+            <td>SVG Data URI which draws a white tick on semi transparent green.</td>
+        </tr>
+        <tr>
+            <td>graySelected</td>
+            <td>Boolean</td>
+            <td>Convenience option: Adds the necessary CSS rules to apply a grayscale filter on selected images.</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>scaleSelected</td>
+            <td>Boolean</td>
+            <td>Convenience option: Adds the necessary CSS rules to apply a downscaling filter on selected images.</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>fixedImageSize</td>
+            <td>Boolean / String</td>
+            <td>Sets a fixed image size to all images (useful if images vary in size). Values can be "200px" or "120px 200px" (not percentages).</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>checkMarkSize</td>
+            <td>Boolean / String</td>
+            <td>Sets a custom size for the image (Useful if your images are very large or very small and the default is not suitable). Values can be "30px" and "20px 30px" (note: percentages do not work).</td>
+            <td>"30px"</td>
+        </tr>
+        <tr>
+            <td>scaleCheckMark</td>
+            <td>Boolean</td>
+            <td>Convenience option: Adds the necessary CSS rules to apply a zooming effect on the checkmark as it appears and disappears.</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>fadeCheckMark</td>
+            <td>Boolean</td>
+            <td>Convenience option: Adds the necessary CSS rules to fade the checkmark in and out.</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>addToForm</td>
+            <td>Boolean / jQuery</td>
+            <td>imgCheckbox can inject the checked elements into the form. If <code>true</code>, imgCheckbox will find a parent form and hook into its submission. A jQuery object can be passed in and the <code>submit</code> listener will attach to it.</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>styles</td>
+            <td>Object</td>
+            <td>For advanced customisation, the full stylesheet is applied using this object.</td>
+            <td>(see source)</td>
+        </tr>
+        <tr>
+            <td>preselect</td>
+            <td>[Integer]</td>
+            <td>To preselect certain elements, use the syntax <code>{ preselect: [0,1,2]}</code></td>
+            <td>[]</td>
+        </tr>
+    </tbody>
+</table>
 
 ## Advanced
 
