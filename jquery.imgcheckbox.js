@@ -1,16 +1,16 @@
 /*
  * imgCheckbox
  *
- * Version: 0.3.4
+ * Version: 0.3.5
  * License: GPLv2
  * Author:  James Cuénod
- * Last Modified: 2015.06.27
+ * Last Modified: 2015.07.07
  *
  */
 (function($) {
 
 	var imgCheckboxClass = function(element, options, id) {
-		var wrapperElement, $finalStyles = {}, grayscaleStyles = {
+		var $wrapperElement, $finalStyles = {}, grayscaleStyles = {
 			"span.imgCheckbox img": {
 				"transform": "scale(1)",
 				"filter": "none",
@@ -46,7 +46,7 @@
 
 		/* *** STYLESHEET STUFF *** */
 		// shove in the custom check mark
-		if (options.checkMarkImage != false)
+		if (options.checkMarkImage !== false)
 			$.extend(true, $finalStyles, { "span.imgCheckbox::before": { "background-image": "url('" + options.checkMarkImage + "')" }});
 		// give the checkmark dimensions
 		var chkDimensions = options.checkMarkSize.split(" ");
@@ -76,7 +76,7 @@
 		if (options.fadeCheckMark)
 			$.extend(true, $finalStyles, fadeCheckMarkStyles);
 
-		$finalStyles = $.extend(true, {}, defaultStyles, $finalStyles, options.styles)
+		$finalStyles = $.extend(true, {}, defaultStyles, $finalStyles, options.styles);
 
 		// Now that we've built up our styles, inject them
 		injectStylesheet($finalStyles, id);
@@ -85,31 +85,34 @@
 		/* *** DOM STUFF *** */
 		element.wrap("<span class='imgCheckbox" + id + "'>");
 		// preselect elements
-		wrapperElement = element.parent();
+		$wrapperElement = element.parent();
 		if (options.preselect.length > 0)
 		{
-			wrapperElement.each(function(index){
+			$wrapperElement.each(function(index){
 				if (options.preselect.indexOf(index) >= 0)
 					$(this).addClass("imgChked");
-			})
+			});
 		}
 		// set up click handler
-		wrapperElement.click(function() {
+		$wrapperElement.click(function() {
 			$(this).toggleClass("imgChked");
 			if (options.addToForm)
 				$( "." + $(this).data("hiddenElementId") ).prop("checked", $(this).hasClass("imgChked"));
 		});
 
 		/* *** INJECT INTO FORM *** */
-		forminjection: if (options.addToForm != false) {
-			if (!(options.addToForm instanceof jQuery)) {
+	  if (options.addToForm instanceof jQuery || options.addToForm === true) {
+	    if (options.addToForm === true)
+	    {
 				options.addToForm = $(element).closest("form");
-				if (options.addToForm.length == 0)
-				{
-					options.addToForm = false;
-					break forminjection;
-				}
+	    }
+			if (options.addToForm.length === 0)
+			{
+				console.log("imgCheckbox: no form found");
+				options.addToForm = false;
 			}
+	  }
+		if (options.addToForm !== false) {
 			$(element).each(function(index){
 				var hiddenElementId = "hEI" + id + "-" + index;
 				$(this).parent().data('hiddenElementId', hiddenElementId);
@@ -168,14 +171,14 @@
 	/* Init */
 	$.fn.imgCheckbox = function(options){
 		if ($(this).data("imgCheckboxId"))
-			return $.fn.imgCheckbox.instances[$(this).data("imgCheckboxId") - 1]
+			return $.fn.imgCheckbox.instances[$(this).data("imgCheckboxId") - 1];
 		else
 		{
-			var $that = new imgCheckboxClass($(this), $.extend(true, {}, $.fn.imgCheckbox.defaults, options), $.fn.imgCheckbox.instances.length)
+			var $that = new imgCheckboxClass($(this), $.extend(true, {}, $.fn.imgCheckbox.defaults, options), $.fn.imgCheckbox.instances.length);
 			$(this).data("imgCheckboxId", $.fn.imgCheckbox.instances.push($that));
 			return $that;
 		}
-	}
+	};
 	$.fn.imgCheckbox.instances = [];
 	$.fn.imgCheckbox.defaults = {
 		"checkMarkImage": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtMzQ2LjM4NCkiPjxwYXRoIGZpbGw9IiMxZWM4MWUiIGZpbGwtb3BhY2l0eT0iLjgiIGQ9Ik0zMiAzNDYuNGEzMiAzMiAwIDAgMC0zMiAzMiAzMiAzMiAwIDAgMCAzMiAzMiAzMiAzMiAwIDAgMCAzMi0zMiAzMiAzMiAwIDAgMC0zMi0zMnptMjEuMyAxMC4zbC0yNC41IDQxTDkuNSAzNzVsMTcuNyA5LjYgMjYtMjh6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTkuNSAzNzUuMmwxOS4zIDIyLjQgMjQuNS00MS0yNiAyOC4yeiIvPjwvZz48L3N2Zz4=",
