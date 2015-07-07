@@ -77,16 +77,16 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
             <td>true</td>
         </tr>
         <tr>
-            <td>styles</td>
-            <td>Object</td>
-            <td>For advanced customisation, the full stylesheet is applied using this object.</td>
-            <td>(see source)</td>
-        </tr>
-        <tr>
             <td>preselect</td>
             <td>[Integer]</td>
             <td>To preselect certain elements, use the syntax <code>{ preselect: [0,1,2]}</code></td>
             <td>[]</td>
+        </tr>
+        <tr>
+            <td>styles</td>
+            <td>Object</td>
+            <td>For advanced customisation, the full stylesheet is applied using this object.</td>
+            <td>(see source)</td>
         </tr>
     </tbody>
 </table>
