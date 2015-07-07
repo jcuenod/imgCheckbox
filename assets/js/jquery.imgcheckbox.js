@@ -1,25 +1,25 @@
 /*
  * imgCheckbox
  *
- * Version: 0.3.3
+ * Version: 0.3.6
  * License: GPLv2
  * Author:  James Cuénod
- * Last Modified: 2015.06.13
+ * Last Modified: 2015.07.07
  *
  */
 (function($) {
 
 	var imgCheckboxClass = function(element, options, id) {
-		var wrapperElement, $finalStyles = {}, grayscaleStyles = {
+		var $wrapperElement, $finalStyles = {}, grayscaleStyles = {
 			"span.imgCheckbox img": {
 				"transform": "scale(1)",
 				"filter": "none",
-				"-webkit-filter": "grayscale(0)"
+				"-webkit-filter": "grayscale(0)",
 			},
 			"span.imgCheckbox.imgChked img": {
-				//"filter": "gray", //TODO - this line probably will not work but is necessary for IE
+				// "filter": "gray", //TODO - this line probably will not work but is necessary for IE
 				"filter": "grayscale(1)",
-				"-webkit-filter": "grayscale(1)"
+				"-webkit-filter": "grayscale(1)",
 			}
 		}, scaleStyles = {
 			"span.imgCheckbox img": {
@@ -30,23 +30,23 @@
 			}
 		}, scaleCheckMarkStyles = {
 			"span.imgCheckbox::before": {
-				"transform": "scale(0)"
+				"transform": "scale(0)",
 			},
 			"span.imgCheckbox.imgChked::before": {
-				"transform": "scale(1)"
+				"transform": "scale(1)",
 			}
 		}, fadeCheckMarkStyles = {
 			"span.imgCheckbox::before": {
-				"opacity": "0"
+				"opacity": "0",
 			},
 			"span.imgCheckbox.imgChked::before": {
-				"opacity": "1"
+				"opacity": "1",
 			}
 		};
 
 		/* *** STYLESHEET STUFF *** */
 		// shove in the custom check mark
-		if (options.checkMarkImage != false)
+		if (options.checkMarkImage !== false)
 			$.extend(true, $finalStyles, { "span.imgCheckbox::before": { "background-image": "url('" + options.checkMarkImage + "')" }});
 		// give the checkmark dimensions
 		var chkDimensions = options.checkMarkSize.split(" ");
@@ -63,45 +63,70 @@
 				"height": imgDimensions[imgDimensions.length - 1]
 			}});
 		}
-		// extend with grayscale for the selected images (if set to true)
-		if (options.graySelected)
-			$.extend(true, $finalStyles, grayscaleStyles);
-		//extend with scale styles (if set to true)
-		if (options.scaleSelected)
-			$.extend(true, $finalStyles, scaleStyles);
-		//extend with scale styles (if set to true)
-		if (options.scaleCheckMark)
-			$.extend(true, $finalStyles, scaleCheckMarkStyles);
-		//extend with scale styles (if set to true)
-		if (options.fadeCheckMark)
-			$.extend(true, $finalStyles, fadeCheckMarkStyles);
 
-		$finalStyles = $.extend(true, {}, defaultStyles, $finalStyles, options.styles)
+		var simpleExtend = [
+			{
+				doExtension: options.graySelected,
+				style: grayscaleStyles
+			},
+			{
+				doExtension: options.scaleSelected,
+				style: scaleStyles
+			},
+			{
+				doExtension: options.scaleCheckMark,
+				style: scaleCheckMarkStyles
+			},
+			{
+				doExtension: options.fadeCheckMark,
+				style: fadeCheckMarkStyles
+			}
+		];
+		simpleExtend.forEach(function(extension) {
+			if (extension.doExtension)
+				$.extend(true, $finalStyles, extension.style);
+		});
 
-		//Now that we've built up our styles, inject them
+		$finalStyles = $.extend(true, {}, defaultStyles, $finalStyles, options.styles);
+
+		// Now that we've built up our styles, inject them
 		injectStylesheet($finalStyles, id);
 
 
 		/* *** DOM STUFF *** */
 		element.wrap("<span class='imgCheckbox" + id + "'>");
-		wrapperElement = element.parent();
-		wrapperElement.click(function() {
+		// preselect elements
+		$wrapperElement = element.parent();
+		if (options.preselect.length > 0)
+		{
+			$wrapperElement.each(function(index) {
+				if (options.preselect.indexOf(index) >= 0)
+					$(this).addClass("imgChked");
+			});
+		}
+		// set up click handler
+		$wrapperElement.click(function() {
 			$(this).toggleClass("imgChked");
 			if (options.addToForm)
 				$( "." + $(this).data("hiddenElementId") ).prop("checked", $(this).hasClass("imgChked"));
 		});
 
 		/* *** INJECT INTO FORM *** */
-		forminjection: if (options.addToForm != false) {
-			if (!(options.addToForm instanceof jQuery)) {
+	  if (options.addToForm instanceof jQuery || options.addToForm === true)
+		{
+	    if (options.addToForm === true)
+	    {
 				options.addToForm = $(element).closest("form");
-				if (options.addToForm.length == 0)
-				{
-					options.addToForm = false;
-					break forminjection;
-				}
+	    }
+			if (options.addToForm.length === 0)
+			{
+				console.log("imgCheckbox: no form found");
+				options.addToForm = false;
 			}
-			$(element).each(function(index){
+	  }
+		if (options.addToForm !== false)
+		{
+			$(element).each(function(index) {
 				var hiddenElementId = "hEI" + id + "-" + index;
 				$(this).parent().data('hiddenElementId', hiddenElementId);
 				var imgName = $(this).attr("name");
@@ -110,6 +135,7 @@
 					.attr('name', imgName)
 					.addClass(hiddenElementId)
 					.css("display", "none")
+					.prop("checked", $(this).parent().hasClass("imgChked"))
 					.appendTo(options.addToForm);
 			});
 		}
@@ -118,7 +144,8 @@
 	};
 
 	/* CSS Injection */
-	function injectStylesheet(stylesObject, id){
+	function injectStylesheet(stylesObject, id)
+	{
 		// Create a blank style
 		var style = document.createElement("style");
 		// WebKit hack
@@ -144,7 +171,8 @@
 		}
 		return ruleSet;
 	}
-	function compatInsertRule(stylesheet, selector, cssText, id){
+	function compatInsertRule(stylesheet, selector, cssText, id)
+	{
 		var modifiedSelector = selector.replace(".imgCheckbox", ".imgCheckbox" + id);
 		// IE8 uses "addRule", everyone else uses "insertRule"
 		if (stylesheet.insertRule) {
@@ -156,16 +184,17 @@
 
 
 	/* Init */
-	$.fn.imgCheckbox = function(options){
+	$.fn.imgCheckbox = function(options)
+	{
 		if ($(this).data("imgCheckboxId"))
-			return $.fn.imgCheckbox.instances[$(this).data("imgCheckboxId") - 1]
+			return $.fn.imgCheckbox.instances[$(this).data("imgCheckboxId") - 1];
 		else
 		{
-			var $that = new imgCheckboxClass($(this), $.extend(true, {}, $.fn.imgCheckbox.defaults, options), $.fn.imgCheckbox.instances.length)
+			var $that = new imgCheckboxClass($(this), $.extend(true, {}, $.fn.imgCheckbox.defaults, options), $.fn.imgCheckbox.instances.length);
 			$(this).data("imgCheckboxId", $.fn.imgCheckbox.instances.push($that));
 			return $that;
 		}
-	}
+	};
 	$.fn.imgCheckbox.instances = [];
 	$.fn.imgCheckbox.defaults = {
 		"checkMarkImage": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtMzQ2LjM4NCkiPjxwYXRoIGZpbGw9IiMxZWM4MWUiIGZpbGwtb3BhY2l0eT0iLjgiIGQ9Ik0zMiAzNDYuNGEzMiAzMiAwIDAgMC0zMiAzMiAzMiAzMiAwIDAgMCAzMiAzMiAzMiAzMiAwIDAgMCAzMi0zMiAzMiAzMiAwIDAgMC0zMi0zMnptMjEuMyAxMC4zbC0yNC41IDQxTDkuNSAzNzVsMTcuNyA5LjYgMjYtMjh6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTkuNSAzNzUuMmwxOS4zIDIyLjQgMjQuNS00MS0yNiAyOC4yeiIvPjwvZz48L3N2Zz4=",
@@ -176,6 +205,7 @@
 		"scaleCheckMark": true,
 		"fadeCheckMark": false,
 		"addToForm": true,
+		"preselect": [],
 	};
 	var defaultStyles = {
 		"span.imgCheckbox img": {
@@ -192,10 +222,10 @@
 			"margin": "5px",
 			"display": "inline-block",
 			"border": "1px solid transparent",
-			"transition-duration": "300ms"
+			"transition-duration": "300ms",
 		},
 		"span.imgCheckbox.imgChked": {
-			"border-color": "#ccc"
+			"border-color": "#ccc",
 		},
 		"span.imgCheckbox::before": {
 			"display": "block",
@@ -208,7 +238,7 @@
 			"margin": "0.5%",
 			"z-index": "1",
 			"text-align": "center",
-			"transition-duration": "300ms"
+			"transition-duration": "300ms",
 		},
 		"span.imgCheckbox.imgChked::before": {
 		}
