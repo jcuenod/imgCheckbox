@@ -1,0 +1,25 @@
+{
+  "name": "imgcheckbox",
+  "version": "0.3.5",
+  "description": "A jQuery plugin that makes img tags checkable much like Google's recaptcha image selection tool.",
+  "main": "jquery.imgcheckbox.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcuenod/imgCheckbox.git"
+  },
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery",
+    "image",
+    "img",
+    "checkable",
+    "checkbox",
+    "select"
+  ],
+  "author": "James Cuénod",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/jcuenod/imgCheckbox/issues"
+  },
+  "homepage": "https://jcuenod.github.io/imgCheckbox/"
+}
