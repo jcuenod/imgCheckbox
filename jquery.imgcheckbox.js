@@ -1,7 +1,7 @@
 /*
  * imgCheckbox
  *
- * Version: 0.3.5
+ * Version: 0.3.6
  * License: GPLv2
  * Author:  James Cuénod
  * Last Modified: 2015.07.07
@@ -63,18 +63,29 @@
 				"height": imgDimensions[imgDimensions.length - 1]
 			}});
 		}
-		// extend with grayscale for the selected images (if set to true)
-		if (options.graySelected)
-			$.extend(true, $finalStyles, grayscaleStyles);
-		// extend with scale styles (if set to true)
-		if (options.scaleSelected)
-			$.extend(true, $finalStyles, scaleStyles);
-		// extend with scale styles (if set to true)
-		if (options.scaleCheckMark)
-			$.extend(true, $finalStyles, scaleCheckMarkStyles);
-		// extend with scale styles (if set to true)
-		if (options.fadeCheckMark)
-			$.extend(true, $finalStyles, fadeCheckMarkStyles);
+
+		var simpleExtend = [
+			{
+				doExtension: options.graySelected,
+				style: grayscaleStyles
+			},
+			{
+				doExtension: options.scaleSelected,
+				style: scaleStyles
+			},
+			{
+				doExtension: options.scaleCheckMark,
+				style: scaleCheckMarkStyles
+			},
+			{
+				doExtension: options.fadeCheckMark,
+				style: fadeCheckMarkStyles
+			}
+		];
+		simpleExtend.forEach(function(extension) {
+			if (extension.doExtension)
+				$.extend(true, $finalStyles, extension.style);
+		});
 
 		$finalStyles = $.extend(true, {}, defaultStyles, $finalStyles, options.styles);
 
@@ -88,7 +99,7 @@
 		$wrapperElement = element.parent();
 		if (options.preselect.length > 0)
 		{
-			$wrapperElement.each(function(index){
+			$wrapperElement.each(function(index) {
 				if (options.preselect.indexOf(index) >= 0)
 					$(this).addClass("imgChked");
 			});
@@ -101,7 +112,8 @@
 		});
 
 		/* *** INJECT INTO FORM *** */
-	  if (options.addToForm instanceof jQuery || options.addToForm === true) {
+	  if (options.addToForm instanceof jQuery || options.addToForm === true)
+		{
 	    if (options.addToForm === true)
 	    {
 				options.addToForm = $(element).closest("form");
@@ -112,8 +124,9 @@
 				options.addToForm = false;
 			}
 	  }
-		if (options.addToForm !== false) {
-			$(element).each(function(index){
+		if (options.addToForm !== false)
+		{
+			$(element).each(function(index) {
 				var hiddenElementId = "hEI" + id + "-" + index;
 				$(this).parent().data('hiddenElementId', hiddenElementId);
 				var imgName = $(this).attr("name");
@@ -131,7 +144,8 @@
 	};
 
 	/* CSS Injection */
-	function injectStylesheet(stylesObject, id){
+	function injectStylesheet(stylesObject, id)
+	{
 		// Create a blank style
 		var style = document.createElement("style");
 		// WebKit hack
@@ -157,7 +171,8 @@
 		}
 		return ruleSet;
 	}
-	function compatInsertRule(stylesheet, selector, cssText, id){
+	function compatInsertRule(stylesheet, selector, cssText, id)
+	{
 		var modifiedSelector = selector.replace(".imgCheckbox", ".imgCheckbox" + id);
 		// IE8 uses "addRule", everyone else uses "insertRule"
 		if (stylesheet.insertRule) {
@@ -169,7 +184,8 @@
 
 
 	/* Init */
-	$.fn.imgCheckbox = function(options){
+	$.fn.imgCheckbox = function(options)
+	{
 		if ($(this).data("imgCheckboxId"))
 			return $.fn.imgCheckbox.instances[$(this).data("imgCheckboxId") - 1];
 		else
