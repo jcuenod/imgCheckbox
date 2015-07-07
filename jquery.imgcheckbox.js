@@ -1,10 +1,10 @@
 /*
  * imgCheckbox
  *
- * Version: 0.3.6
+ * Version: 0.3.7
  * License: GPLv2
  * Author:  James Cuénod
- * Last Modified: 2015.07.07
+ * Last Modified: 2015.07.08
  *
  */
 (function($) {
@@ -64,7 +64,7 @@
 			}});
 		}
 
-		var simpleExtend = [
+		var conditionalExtend = [
 			{
 				doExtension: options.graySelected,
 				style: grayscaleStyles
@@ -82,7 +82,7 @@
 				style: fadeCheckMarkStyles
 			}
 		];
-		simpleExtend.forEach(function(extension) {
+		conditionalExtend.forEach(function(extension) {
 			if (extension.doExtension)
 				$.extend(true, $finalStyles, extension.style);
 		});
@@ -106,9 +106,23 @@
 		}
 		// set up click handler
 		$wrapperElement.click(function() {
-			$(this).toggleClass("imgChked");
-			if (options.addToForm)
-				$( "." + $(this).data("hiddenElementId") ).prop("checked", $(this).hasClass("imgChked"));
+			if (options.radio)
+			{
+				$wrapperElement.removeClass("imgChked");
+				$(this).addClass("imgChked");
+				if (options.addToForm)
+				{
+					$wrapperElement.each(function(){
+						$( "." + $(this).data("hiddenElementId") ).prop("checked", $(this).hasClass("imgChked"));
+					});
+				}
+			}
+			else
+			{
+				$(this).toggleClass("imgChked");
+				if (options.addToForm)
+					$( "." + $(this).data("hiddenElementId") ).prop("checked", $(this).hasClass("imgChked"));
+			}
 		});
 
 		/* *** INJECT INTO FORM *** */
@@ -206,6 +220,7 @@
 		"fadeCheckMark": false,
 		"addToForm": true,
 		"preselect": [],
+		"radio": false,
 	};
 	var defaultStyles = {
 		"span.imgCheckbox img": {

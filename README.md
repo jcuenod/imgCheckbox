@@ -83,6 +83,12 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
             <td>[]</td>
         </tr>
         <tr>
+            <td>radio</td>
+            <td>Boolean</td>
+            <td>Images function as radio/option buttons (rather than checkboxes). Only one can be selected</td>
+            <td>false</td>
+        </tr>
+        <tr>
             <td>styles</td>
             <td>Object</td>
             <td>For advanced customisation, the full stylesheet is applied using this object.</td>

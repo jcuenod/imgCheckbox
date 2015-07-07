@@ -1,6 +1,6 @@
 {
   "name": "imgcheckbox",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "A jQuery plugin that makes img tags checkable much like Google's recaptcha image selection tool.",
   "main": "jquery.imgcheckbox.js",
   "repository": {
