@@ -79,13 +79,13 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
         <tr>
             <td>preselect</td>
             <td>[Integer]</td>
-            <td>To preselect certain elements, use the syntax <code>{ preselect: [0,1,2]}</code></td>
+            <td>To preselect certain elements, use this syntax:<br /><code>{ preselect: [0,1,2]}</code></td>
             <td>[]</td>
         </tr>
         <tr>
             <td>radio</td>
             <td>Boolean</td>
-            <td>Images function as radio/option buttons (rather than checkboxes). Only one can be selected</td>
+            <td>Images function as radio/option buttons (rather than checkboxes). Only one can be selected.</td>
             <td>false</td>
         </tr>
         <tr>
@@ -95,6 +95,26 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
             <td>(see source)</td>
         </tr>
     </tbody>
+</table>
+
+## Methods
+
+<table>
+  <thead>
+    <th>Method</th><th>Usage</th><th>Return</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>$.select()</code></td>
+      <td>Selects the element (if it is a member of an imgCheckbox group). If the element is part of a radio group, the other elements will be deselected.</td>
+      <td>jQuery</td>
+    </tr>
+      <tr>
+        <td><code>$.deselect()</code></td>
+        <td>Deselects the element (if it is a member of an imgCheckbox group). Other elements are unaffected (even in radio groups).</td>
+        <td>jQuery</td>
+      </tr>
+  </tbody>
 </table>
 
 ## Advanced
