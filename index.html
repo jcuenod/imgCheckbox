@@ -56,7 +56,7 @@
 					</p>
 			</section>
 
-			<section id="options" class="wrapper style2">
+			<section id="options" class="wrapper">
 				<header class="major">
 					<h2>Options</h2>
 				</header>
@@ -117,7 +117,7 @@
 			        <tr>
 			            <td>preselect</td>
 			            <td>[Integer]</td>
-			            <td>To preselect certain elements, use the syntax <code>{ preselect: [0,1,2]}</code></td>
+			            <td>To preselect certain elements, use this syntax:<br /><code>{ preselect: [0,1,2]}</code></td>
 			            <td>[]</td>
 			        </tr>
 			        <tr>
@@ -132,6 +132,31 @@
 								<td>For advanced customisation, the full stylesheet is applied using this object.</td>
 								<td>(see source)</td>
 							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<section id="methods" class="wrapper style2">
+				<header class="major">
+					<h2>Methods</h2>
+				</header>
+				<div class="inner alt">
+					<table class="alt">
+						<thead>
+							<th>Method</th><th>Usage</th><th>Return</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td><code>$.select()</code></td>
+								<td>Selects the element (if it is a member of an imgCheckbox group). If the element is part of a radio group, the other elements will be deselected.</td>
+								<td>jQuery</td>
+							</tr>
+								<tr>
+									<td><code>$.deselect()</code></td>
+									<td>Deselects the element (if it is a member of an imgCheckbox group). Other elements are unaffected (even in radio groups).</td>
+									<td>jQuery</td>
+								</tr>
 						</tbody>
 					</table>
 				</div>
@@ -184,6 +209,7 @@
 					<a href="#basicusage" class=" scrolly">Basic Usage</a>
 					<!-- <a href="#multiple" class="scrolly">Mulitple Instances</a> -->
 					<a href="#options" class="scrolly">Options</a>
+					<a href="#methods" class=" scrolly">Methods</a>
 					<a href="#advanced" class="scrolly">Advanced Usage</a>
 				</span>
 			</navigation>
@@ -194,7 +220,7 @@
 			<script src="assets/js/jquery.imgcheckbox.js"></script>
 			<script type="text/javascript">
 			$(document).ready(function(){
-				$("header img").imgCheckbox({
+				var f = $("header img").imgCheckbox({
 					"styles": {
 						"span.imgCheckbox img": {
 							"border-radius": "6px"

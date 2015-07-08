@@ -1,13 +1,16 @@
 /*
  * imgCheckbox
  *
- * Version: 0.3.7
+ * Version: 0.3.8
  * License: GPLv2
  * Author:  James Cuénod
  * Last Modified: 2015.07.08
  *
  */
 (function($) {
+	var CHK_TOGGLE = 0;
+	var CHK_SELECT = 1;
+  var CHK_DESELECT = 2;
 
 	var imgCheckboxClass = function(element, options, id) {
 		var $wrapperElement, $finalStyles = {}, grayscaleStyles = {
@@ -95,8 +98,22 @@
 
 		/* *** DOM STUFF *** */
 		element.wrap("<span class='imgCheckbox" + id + "'>");
-		// preselect elements
 		$wrapperElement = element.parent();
+		// set up select/deselect functions
+		$wrapperElement.each(function(){
+			var $that = $(this);
+			$(this).data("imgchk.deselect", function(){
+				changeSelection($that, CHK_DESELECT, options.addToForm, options.radio, $wrapperElement);
+			}).data("imgchk.select", function(){
+				changeSelection($that, CHK_SELECT, options.addToForm, options.radio, $wrapperElement);
+			});
+			$(this).children().first().data("imgchk.deselect", function(){
+				changeSelection($that, CHK_DESELECT, options.addToForm, options.radio, $wrapperElement);
+			}).data("imgchk.select", function(){
+				changeSelection($that, CHK_SELECT, options.addToForm, options.radio, $wrapperElement);
+			});
+		});
+		// preselect elements
 		if (options.preselect.length > 0)
 		{
 			$wrapperElement.each(function(index) {
@@ -106,23 +123,7 @@
 		}
 		// set up click handler
 		$wrapperElement.click(function() {
-			if (options.radio)
-			{
-				$wrapperElement.removeClass("imgChked");
-				$(this).addClass("imgChked");
-				if (options.addToForm)
-				{
-					$wrapperElement.each(function(){
-						$( "." + $(this).data("hiddenElementId") ).prop("checked", $(this).hasClass("imgChked"));
-					});
-				}
-			}
-			else
-			{
-				$(this).toggleClass("imgChked");
-				if (options.addToForm)
-					$( "." + $(this).data("hiddenElementId") ).prop("checked", $(this).hasClass("imgChked"));
-			}
+			changeSelection($(this), CHK_TOGGLE, options.addToForm, options.radio, $wrapperElement);
 		});
 
 		/* *** INJECT INTO FORM *** */
@@ -196,10 +197,41 @@
 		}
 	}
 
+	function changeSelection($chosenElement, howToModify, addToForm, radio, $wrapperElement)
+	{
+		if (radio && howToModify !== CHK_DESELECT)
+		{
+			$wrapperElement.removeClass("imgChked");
+			$chosenElement.addClass("imgChked");
+		}
+		else
+		{
+			switch (howToModify) {
+				case CHK_DESELECT:
+					$chosenElement.removeClass("imgChked");
+					break;
+				case CHK_TOGGLE:
+					$chosenElement.toggleClass("imgChked");
+					break;
+				case CHK_SELECT:
+					$chosenElement.addClass("imgChked");
+					break;
+			}
+		}
+		if (addToForm)
+			updateFormValues(radio ? $wrapperElement : $chosenElement);
+	}
+	function updateFormValues($element)
+	{
+		$element.each(function(){
+			console.log($(this));
+			$( "." + $(this).data("hiddenElementId") ).prop("checked", $(this).hasClass("imgChked"));
+		});
+	}
+
 
 	/* Init */
-	$.fn.imgCheckbox = function(options)
-	{
+	$.fn.imgCheckbox = function(options) {
 		if ($(this).data("imgCheckboxId"))
 			return $.fn.imgCheckbox.instances[$(this).data("imgCheckboxId") - 1];
 		else
@@ -208,6 +240,20 @@
 			$(this).data("imgCheckboxId", $.fn.imgCheckbox.instances.push($that));
 			return $that;
 		}
+	};
+	$.fn.deselect = function() {
+		if (this.data("imgchk.deselect"))
+		{
+			this.data("imgchk.deselect")();
+		}
+		return this;
+	};
+	$.fn.select = function() {
+		if (this.data("imgchk.select"))
+		{
+			this.data("imgchk.select")();
+		}
+		return this;
 	};
 	$.fn.imgCheckbox.instances = [];
 	$.fn.imgCheckbox.defaults = {
