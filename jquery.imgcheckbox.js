@@ -1,10 +1,10 @@
 /*
  * imgCheckbox
  *
- * Version: 0.4.0
+ * Version: 0.4.1
  * License: GPLv2
  * Author:  James Cuénod
- * Last Modified: 2015.07.08
+ * Last Modified: 2015.07.27
  *
  */
 (function($) {
@@ -124,6 +124,7 @@
 		// set up click handler
 		$wrapperElement.click(function() {
 			changeSelection($(this), CHK_TOGGLE, options.addToForm, options.radio, $wrapperElement);
+			options.onclick();
 		});
 
 		/* *** INJECT INTO FORM *** */
@@ -237,6 +238,7 @@
 		{
 			var $that = new imgCheckboxClass($(this), $.extend(true, {}, $.fn.imgCheckbox.defaults, options), $.fn.imgCheckbox.instances.length);
 			$(this).data("imgCheckboxId", $.fn.imgCheckbox.instances.push($that));
+			options.onload();
 			return $that;
 		}
 	};
@@ -266,6 +268,8 @@
 		"addToForm": true,
 		"preselect": [],
 		"radio": false,
+		"onload": false,
+		"onclick": false,
 	};
 	var defaultStyles = {
 		"span.imgCheckbox img": {

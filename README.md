@@ -117,6 +117,34 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
   </tbody>
 </table>
 
+## Events
+
+Event callbacks are accessible via the options menu. Use the syntax:
+
+```JavaScript
+$("img").imgCheckbox({
+    onload: function(){
+      // Do something fantastic!
+    }
+});
+```
+
+<table>
+  <thead>
+    <th>Event</th><th>Explanation</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>onload</code></td>
+      <td>Fires when the initialisation of the imgCheckbox collection is complete.</td>
+    </tr>
+      <tr>
+        <td><code>onclick</code></td>
+        <td>Fires when an element is clicked.</td>
+      </tr>
+  </tbody>
+</table>
+
 ## Advanced
 
 You can add any custom styles using the `styles` option. For example, to add a blur filter to selected images:
