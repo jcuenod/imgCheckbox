@@ -137,6 +137,37 @@
 				</div>
 			</section>
 
+			<section id="events" class="wrapper special">
+				<header class="major">
+					<h2>Events</h2>
+				</header>
+				<div class="inner alt">
+					<p>Event callbacks are accessible via the options menu. Use the syntax:</p>
+					<pre><code style="text-align: left">
+						$("img").imgCheckbox({
+						    onload: function(){
+						      // Do something fantastic!
+						    }
+						});
+					</code></pre>
+					<table class="alt">
+					  <thead>
+					    <th>Event</th><th>Explanation</th>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <td><code>onload</code></td>
+					      <td>Fires when the initialisation of the imgCheckbox collection is complete.</td>
+					    </tr>
+					      <tr>
+					        <td><code>onclick</code></td>
+					        <td>Fires when an element is clicked.</td>
+					      </tr>
+					  </tbody>
+					</table>
+				</div>
+			</section>
+
 			<section id="methods" class="wrapper style2">
 				<header class="major">
 					<h2>Methods</h2>
@@ -209,6 +240,7 @@
 					<a href="#basicusage" class=" scrolly">Basic Usage</a>
 					<!-- <a href="#multiple" class="scrolly">Mulitple Instances</a> -->
 					<a href="#options" class="scrolly">Options</a>
+					<a href="#events" class="scrolly">Events</a>
 					<a href="#methods" class=" scrolly">Methods</a>
 					<a href="#advanced" class="scrolly">Advanced Usage</a>
 				</span>
