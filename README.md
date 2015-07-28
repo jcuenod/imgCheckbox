@@ -119,7 +119,7 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
 
 ## Events
 
-Event callbacks are accessible via the options menu. Use the syntax:
+Event callbacks are accessible via the options object. Use the syntax:
 
 ```JavaScript
 $("img").imgCheckbox({
