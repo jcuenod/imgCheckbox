@@ -1,17 +1,17 @@
 # Description
-**imgCheckbox** is a jQuery plugin that makes img tags checkable much like Google's recaptcha image selection tool. See it in action on the demo page: http://jcuenod.github.io/imgCheckbox/
+**imgCheckbox** is a jQuery plugin that makes img tags checkable (much like Google's recaptcha image selection tool). See it in action on the demo page: http://jcuenod.github.io/imgCheckbox/
 
 ## Usage
 
 You can call `imgCheckbox` without any parameters on any jQuery collection containing `<img>` elements.
 
-```JavaScript
+```javascript
 $("img.checkable").imgCheckbox();
 ```
 
-You can have mulitple sets of imgCheckboxes with different parameters
+You can have multiple sets of imgCheckboxes with different parameters.
 
-```JavaScript
+```javascript
 $("img.checkableGroup1").imgCheckbox();
 $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
 ```
@@ -31,7 +31,7 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
         <tr>
             <td>checkMarkImage</td>
             <td>URL</td>
-            <td>Supports anything your browser support in the <code>background-image</code> property (of a pseudo selector).</td>
+            <td>Supports anything your browser support in the `background-image` property (of a pseudo selector).</td>
             <td>SVG Data URI which draws a white tick on semi transparent green.</td>
         </tr>
         <tr>
@@ -73,13 +73,13 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
         <tr>
             <td>addToForm</td>
             <td>Boolean / jQuery</td>
-            <td>imgCheckbox can inject the checked elements into the form. If <code>true</code>, imgCheckbox will find a parent form and hook into its submission. A jQuery object can be passed in and the <code>submit</code> listener will attach to it.</td>
+            <td>imgCheckbox can inject the checked elements into the form. If `true`, imgCheckbox will find a parent form and hook into its submission. A jQuery object can be passed in and the `submit` listener will attach to it.</td>
             <td>true</td>
         </tr>
         <tr>
             <td>preselect</td>
             <td>[Integer]</td>
-            <td>To preselect certain elements, use this syntax:<br /><code>{ preselect: [0,1,2]}</code></td>
+            <td>To preselect certain elements, use this syntax:<br />`{ preselect: [0,1,2]}`</td>
             <td>[]</td>
         </tr>
         <tr>
@@ -105,12 +105,12 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
   </thead>
   <tbody>
     <tr>
-      <td><code>$.select()</code></td>
+      <td>`$.select()`</td>
       <td>Selects the element (if it is a member of an imgCheckbox group). If the element is part of a radio group, the other elements will be deselected.</td>
       <td>jQuery</td>
     </tr>
       <tr>
-        <td><code>$.deselect()</code></td>
+        <td>`$.deselect()`</td>
         <td>Deselects the element (if it is a member of an imgCheckbox group). Other elements are unaffected (even in radio groups).</td>
         <td>jQuery</td>
       </tr>
@@ -121,7 +121,7 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
 
 Event callbacks are accessible via the options object. Use the syntax:
 
-```JavaScript
+```javascript
 $("img").imgCheckbox({
     onload: function(){
       // Do something fantastic!
@@ -135,11 +135,11 @@ $("img").imgCheckbox({
   </thead>
   <tbody>
     <tr>
-      <td><code>onload</code></td>
+      <td>`onload`</td>
       <td>Fires when the initialisation of the imgCheckbox collection is complete.</td>
     </tr>
       <tr>
-        <td><code>onclick</code></td>
+        <td>`onclick`</td>
         <td>Fires when an element is clicked.</td>
       </tr>
   </tbody>
@@ -149,7 +149,7 @@ $("img").imgCheckbox({
 
 You can add any custom styles using the `styles` option. For example, to add a blur filter to selected images:
 
-```JavaScript
+```javascript
 $("img").imgCheckbox({
 	"styles": {
 		"span.imgCheckbox.imgChked img": {
