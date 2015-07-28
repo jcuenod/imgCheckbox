@@ -1,5 +1,5 @@
 # Description
-**imgCheckbox** is a jQuery plugin that makes img tags checkable much like Google's recaptcha image selection tool.
+**imgCheckbox** is a jQuery plugin that makes img tags checkable much like Google's recaptcha image selection tool. See it in action on the demo page: http://jcuenod.github.io/imgCheckbox/
 
 ## Usage
 
