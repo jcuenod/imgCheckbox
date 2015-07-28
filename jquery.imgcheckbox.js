@@ -124,7 +124,8 @@
 		// set up click handler
 		$wrapperElement.click(function() {
 			changeSelection($(this), CHK_TOGGLE, options.addToForm, options.radio, $wrapperElement);
-			options.onclick();
+			if (options.onclick)
+				options.onclick();
 		});
 
 		/* *** INJECT INTO FORM *** */
@@ -238,7 +239,8 @@
 		{
 			var $that = new imgCheckboxClass($(this), $.extend(true, {}, $.fn.imgCheckbox.defaults, options), $.fn.imgCheckbox.instances.length);
 			$(this).data("imgCheckboxId", $.fn.imgCheckbox.instances.push($that));
-			options.onload();
+			if (options.onload)
+				options.onload();
 			return $that;
 		}
 	};
