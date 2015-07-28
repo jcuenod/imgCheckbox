@@ -31,7 +31,7 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
         <tr>
             <td>checkMarkImage</td>
             <td>URL</td>
-            <td>Supports anything your browser support in the `background-image` property (of a pseudo selector).</td>
+            <td>Supports anything your browser support in the <code>background-image</code> property (of a pseudo selector).</td>
             <td>SVG Data URI which draws a white tick on semi transparent green.</td>
         </tr>
         <tr>
@@ -73,13 +73,13 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
         <tr>
             <td>addToForm</td>
             <td>Boolean / jQuery</td>
-            <td>imgCheckbox can inject the checked elements into the form. If `true`, imgCheckbox will find a parent form and hook into its submission. A jQuery object can be passed in and the `submit` listener will attach to it.</td>
+            <td>imgCheckbox can inject the checked elements into the form. If <code>true</code>, imgCheckbox will find a parent form and hook into its submission. A jQuery object can be passed in and the <code>submit</code> listener will attach to it.</td>
             <td>true</td>
         </tr>
         <tr>
             <td>preselect</td>
             <td>[Integer]</td>
-            <td>To preselect certain elements, use this syntax:<br />`{ preselect: [0,1,2]}`</td>
+            <td>To preselect certain elements, use this syntax:<br /><code>{ preselect: [0,1,2]}</code></td>
             <td>[]</td>
         </tr>
         <tr>
@@ -105,12 +105,12 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
   </thead>
   <tbody>
     <tr>
-      <td>`$.select()`</td>
+      <td><code>$.select()</code></td>
       <td>Selects the element (if it is a member of an imgCheckbox group). If the element is part of a radio group, the other elements will be deselected.</td>
       <td>jQuery</td>
     </tr>
       <tr>
-        <td>`$.deselect()`</td>
+        <td><code>$.deselect()</code></td>
         <td>Deselects the element (if it is a member of an imgCheckbox group). Other elements are unaffected (even in radio groups).</td>
         <td>jQuery</td>
       </tr>
@@ -135,11 +135,11 @@ $("img").imgCheckbox({
   </thead>
   <tbody>
     <tr>
-      <td>`onload`</td>
+      <td><code>onload</code></td>
       <td>Fires when the initialisation of the imgCheckbox collection is complete.</td>
     </tr>
       <tr>
-        <td>`onclick`</td>
+        <td><code>onclick</code></td>
         <td>Fires when an element is clicked.</td>
       </tr>
   </tbody>
