@@ -137,7 +137,8 @@
 	    }
 			if (options.addToForm.length === 0)
 			{
-				console.log("imgCheckbox: no form found (looks for form by default)");
+				if (optins.debugMessages)
+					console.log("imgCheckbox: no form found (looks for form by default)");
 				options.addToForm = false;
 			}
 	  }
@@ -234,14 +235,16 @@
 	/* Init */
 	$.fn.imgCheckbox = function(options) {
 		if ($(this).data("imgCheckboxId"))
-			return $.fn.imgCheckbox.instances[$(this).data("imgCheckboxId") - 1];
+			//already initialised: old instance = $.fn.imgCheckbox.instances[$(this).data("imgCheckboxId") - 1];
+			return this;
 		else
 		{
-			var $that = new imgCheckboxClass($(this), $.extend(true, {}, $.fn.imgCheckbox.defaults, options), $.fn.imgCheckbox.instances.length);
+			var optionsWithDefaults = $.extend(true, {}, $.fn.imgCheckbox.defaults, options);
+			var $that = new imgCheckboxClass($(this), optionsWithDefaults, $.fn.imgCheckbox.instances.length);
 			$(this).data("imgCheckboxId", $.fn.imgCheckbox.instances.push($that));
-			if (options.onload)
-				options.onload();
-			return $that;
+			if (optionsWithDefaults.onload)
+				optionsWithDefaults.onload();
+			return this;
 		}
 	};
 	$.fn.deselect = function() {
@@ -272,6 +275,7 @@
 		"radio": false,
 		"onload": false,
 		"onclick": false,
+		"debugMessages": false,
 	};
 	var defaultStyles = {
 		"span.imgCheckbox img": {
