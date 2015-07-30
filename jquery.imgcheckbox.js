@@ -1,7 +1,7 @@
 /*
  * imgCheckbox
  *
- * Version: 0.4.5
+ * Version: 0.4.6
  * License: GPLv2
  * Author:  James Cuénod
  * Last Modified: 2015.07.30
@@ -137,7 +137,7 @@
 	    }
 			if (options.addToForm.length === 0)
 			{
-				if (optins.debugMessages)
+				if (options.debugMessages)
 					console.log("imgCheckbox: no form found (looks for form by default)");
 				options.addToForm = false;
 			}
