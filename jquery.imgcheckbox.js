@@ -1,7 +1,7 @@
 /*
  * imgCheckbox
  *
- * Version: 0.4.4
+ * Version: 0.4.5
  * License: GPLv2
  * Author:  James Cuénod
  * Last Modified: 2015.07.30
@@ -100,7 +100,7 @@
 		element.wrap("<span class='imgCheckbox" + id + "'>");
 		$wrapperElement = element.parent();
 		// set up select/deselect functions
-		$wrapperElement.each(function(){
+		$wrapperElement.each(function() {
 			var $that = $(this);
 			$(this).data("imgchk.deselect", function(){
 				changeSelection($that, CHK_DESELECT, options.addToForm, options.radio, $wrapperElement);
@@ -173,7 +173,7 @@
 
 		var stylesheet = document.styleSheets[document.styleSheets.length - 1];
 
-		for (var selector in stylesObject){
+		for (var selector in stylesObject) {
 			if (stylesObject.hasOwnProperty(selector)) {
 				compatInsertRule(stylesheet, selector, buildRules(stylesObject[selector]), id);
 			}
@@ -182,7 +182,7 @@
 	function buildRules(ruleObject)
 	{
 		var ruleSet = "";
-		for (var property in ruleObject){
+		for (var property in ruleObject) {
 			if (ruleObject.hasOwnProperty(property)) {
 				 ruleSet += property + ":" + ruleObject[property] + ";";
 			}
@@ -226,7 +226,7 @@
 	}
 	function updateFormValues($element)
 	{
-		$element.each(function(){
+		$element.each(function() {
 			$( "." + $(this).data("hiddenElementId") ).prop("checked", $(this).hasClass("imgChked"));
 		});
 	}
