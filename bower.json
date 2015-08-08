@@ -1,5 +1,5 @@
 {
-  "name": "imgCheckbox",
+  "name": "imgcheckbox",
   "version": "0.4.7",
   "homepage": "https://jcuenod.github.io/imgCheckbox/",
   "authors": [
@@ -19,5 +19,9 @@
     "jquery-plugin",
     "ecosy"
   ],
-  "license": "GPL-2.0"
+  "license": "GPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jcuenod/imgcheckbox.git"
+  }
 }
