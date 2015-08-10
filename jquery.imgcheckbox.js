@@ -11,6 +11,48 @@
 	var CHK_TOGGLE = 0;
 	var CHK_SELECT = 1;
   var CHK_DESELECT = 2;
+	var CHECKMARK_POSITION = {
+		"top-left": {
+		  "top": "0.5%",
+			"left": "0.5%",
+		},
+		"top": {
+			"top": "0.5%",
+			"left": 0,
+			"right": 0,
+			"margin": "auto",
+		},
+		"top-right": {
+			"top": "0.5%",
+		  "right": "0.5%",
+		},
+		"left": {
+			"left": "0.5%",
+			"bottom": 0,
+			"top": 0,
+			"margin": "auto",
+		},
+		"right": {
+			"right": "0.5%",
+			"bottom": 0,
+			"top": 0,
+			"margin": "auto",
+		},
+		"bottom-left": {
+			"bottom": "0.5%",
+			"left": "0.5%",
+		},
+		"bottom": {
+			"bottom": "0.5%",
+			"left": 0,
+			"right": 0,
+			"margin": "auto",
+		},
+		"bottom-right": {
+		  "bottom": "0.5%",
+			"right": "0.5%",
+		},
+	};
 
 	var imgCheckboxClass = function(element, options, id) {
 		var $wrapperElement, $finalStyles = {}, grayscaleStyles = {
@@ -57,6 +99,8 @@
 			"width": chkDimensions[0],
 			"height": chkDimensions[chkDimensions.length - 1]
 		}});
+		// give the checkmark a position
+		$.extend(true, $finalStyles, { "span.imgCheckbox::before": CHECKMARK_POSITION [ options.checkMarkPosition ] });
 		// fixed image sizes
 		if (options.fixedImageSize)
 		{
@@ -268,6 +312,7 @@
 		"scaleSelected": true,
 		"fixedImageSize": false,
 		"checkMarkSize": "30px",
+		"checkMarkPosition": "top-left",
 		"scaleCheckMark": true,
 		"fadeCheckMark": false,
 		"addToForm": true,
@@ -291,6 +336,7 @@
 		  "-webkit-user-select": "none",  /* Chrome all / Safari all */
 		  "-moz-user-select": "none",     /* Firefox all */
   		"-ms-user-select": "none",      /* IE 10+ */
+			"position": "relative",
 			"padding": "0",
 			"margin": "5px",
 			"display": "inline-block",

@@ -17,7 +17,7 @@
     "checkbox",
     "select",
     "jquery-plugin",
-    "ecosy"
+    "ecosystem:jquery"
   ],
   "license": "GPL-2.0",
   "repository": {
