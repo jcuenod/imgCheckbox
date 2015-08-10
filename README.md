@@ -59,6 +59,12 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
             <td>"30px"</td>
         </tr>
         <tr>
+            <td>checkMarkPosition</td>
+            <td>String</td>
+            <td>Sets the position of the checkMark. Accepts values in the form <code>top</code>, <code>left</code> <code>top-left</code> etc. (for more advanced positioning, the <code>styles</code> option can be used on <code>span.imgCheckbox::before</code>)</td>
+            <td><code>top-left</code></td>
+        </tr>
+        <tr>
             <td>scaleCheckMark</td>
             <td>Boolean</td>
             <td>Convenience option: Adds the necessary CSS rules to apply a zooming effect on the checkmark as it appears and disappears.</td>
