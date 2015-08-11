@@ -1,16 +1,58 @@
 /*
  * imgCheckbox
  *
- * Version: 0.3.8
+ * Version: 0.5.0
  * License: GPLv2
  * Author:  James Cuénod
- * Last Modified: 2015.07.08
+ * Last Modified: 2015.08.10
  *
  */
 (function($) {
 	var CHK_TOGGLE = 0;
 	var CHK_SELECT = 1;
   var CHK_DESELECT = 2;
+	var CHECKMARK_POSITION = {
+		"top-left": {
+		  "top": "0.5%",
+			"left": "0.5%",
+		},
+		"top": {
+			"top": "0.5%",
+			"left": 0,
+			"right": 0,
+			"margin": "auto",
+		},
+		"top-right": {
+			"top": "0.5%",
+		  "right": "0.5%",
+		},
+		"left": {
+			"left": "0.5%",
+			"bottom": 0,
+			"top": 0,
+			"margin": "auto",
+		},
+		"right": {
+			"right": "0.5%",
+			"bottom": 0,
+			"top": 0,
+			"margin": "auto",
+		},
+		"bottom-left": {
+			"bottom": "0.5%",
+			"left": "0.5%",
+		},
+		"bottom": {
+			"bottom": "0.5%",
+			"left": 0,
+			"right": 0,
+			"margin": "auto",
+		},
+		"bottom-right": {
+		  "bottom": "0.5%",
+			"right": "0.5%",
+		},
+	};
 
 	var imgCheckboxClass = function(element, options, id) {
 		var $wrapperElement, $finalStyles = {}, grayscaleStyles = {
@@ -57,6 +99,8 @@
 			"width": chkDimensions[0],
 			"height": chkDimensions[chkDimensions.length - 1]
 		}});
+		// give the checkmark a position
+		$.extend(true, $finalStyles, { "span.imgCheckbox::before": CHECKMARK_POSITION [ options.checkMarkPosition ] });
 		// fixed image sizes
 		if (options.fixedImageSize)
 		{
@@ -100,7 +144,7 @@
 		element.wrap("<span class='imgCheckbox" + id + "'>");
 		$wrapperElement = element.parent();
 		// set up select/deselect functions
-		$wrapperElement.each(function(){
+		$wrapperElement.each(function() {
 			var $that = $(this);
 			$(this).data("imgchk.deselect", function(){
 				changeSelection($that, CHK_DESELECT, options.addToForm, options.radio, $wrapperElement);
@@ -124,6 +168,8 @@
 		// set up click handler
 		$wrapperElement.click(function() {
 			changeSelection($(this), CHK_TOGGLE, options.addToForm, options.radio, $wrapperElement);
+			if (options.onclick)
+				options.onclick();
 		});
 
 		/* *** INJECT INTO FORM *** */
@@ -135,7 +181,8 @@
 	    }
 			if (options.addToForm.length === 0)
 			{
-				console.log("imgCheckbox: no form found");
+				if (options.debugMessages)
+					console.log("imgCheckbox: no form found (looks for form by default)");
 				options.addToForm = false;
 			}
 	  }
@@ -170,7 +217,7 @@
 
 		var stylesheet = document.styleSheets[document.styleSheets.length - 1];
 
-		for (var selector in stylesObject){
+		for (var selector in stylesObject) {
 			if (stylesObject.hasOwnProperty(selector)) {
 				compatInsertRule(stylesheet, selector, buildRules(stylesObject[selector]), id);
 			}
@@ -179,7 +226,7 @@
 	function buildRules(ruleObject)
 	{
 		var ruleSet = "";
-		for (var property in ruleObject){
+		for (var property in ruleObject) {
 			if (ruleObject.hasOwnProperty(property)) {
 				 ruleSet += property + ":" + ruleObject[property] + ";";
 			}
@@ -223,8 +270,7 @@
 	}
 	function updateFormValues($element)
 	{
-		$element.each(function(){
-			console.log($(this));
+		$element.each(function() {
 			$( "." + $(this).data("hiddenElementId") ).prop("checked", $(this).hasClass("imgChked"));
 		});
 	}
@@ -233,12 +279,16 @@
 	/* Init */
 	$.fn.imgCheckbox = function(options) {
 		if ($(this).data("imgCheckboxId"))
-			return $.fn.imgCheckbox.instances[$(this).data("imgCheckboxId") - 1];
+			//already initialised: old instance = $.fn.imgCheckbox.instances[$(this).data("imgCheckboxId") - 1];
+			return this;
 		else
 		{
-			var $that = new imgCheckboxClass($(this), $.extend(true, {}, $.fn.imgCheckbox.defaults, options), $.fn.imgCheckbox.instances.length);
+			var optionsWithDefaults = $.extend(true, {}, $.fn.imgCheckbox.defaults, options);
+			var $that = new imgCheckboxClass($(this), optionsWithDefaults, $.fn.imgCheckbox.instances.length);
 			$(this).data("imgCheckboxId", $.fn.imgCheckbox.instances.push($that));
-			return $that;
+			if (optionsWithDefaults.onload)
+				optionsWithDefaults.onload();
+			return this;
 		}
 	};
 	$.fn.deselect = function() {
@@ -262,11 +312,15 @@
 		"scaleSelected": true,
 		"fixedImageSize": false,
 		"checkMarkSize": "30px",
+		"checkMarkPosition": "top-left",
 		"scaleCheckMark": true,
 		"fadeCheckMark": false,
 		"addToForm": true,
 		"preselect": [],
 		"radio": false,
+		"onload": false,
+		"onclick": false,
+		"debugMessages": false,
 	};
 	var defaultStyles = {
 		"span.imgCheckbox img": {
@@ -279,6 +333,10 @@
 		},
 		"span.imgCheckbox": {
 			"user-select": "none",
+		  "-webkit-user-select": "none",  /* Chrome all / Safari all */
+		  "-moz-user-select": "none",     /* Firefox all */
+  		"-ms-user-select": "none",      /* IE 10+ */
+			"position": "relative",
 			"padding": "0",
 			"margin": "5px",
 			"display": "inline-block",
