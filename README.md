@@ -61,7 +61,7 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
         <tr>
             <td>checkMarkPosition</td>
             <td>String</td>
-            <td>Sets the position of the checkMark. Accepts values in the form <code>top</code>, <code>left</code> <code>top-left</code> etc. (for more advanced positioning, the <code>styles</code> option can be used on <code>span.imgCheckbox::before</code>)</td>
+            <td>Sets the position of the checkMark. Accepts values in the form <code>top</code>, <code>left</code>, <code>top-left</code> etc. (for more advanced positioning, the <code>styles</code> option can be used on <code>span.imgCheckbox::before</code>)</td>
             <td><code>top-left</code></td>
         </tr>
         <tr>
