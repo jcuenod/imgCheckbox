@@ -1,10 +1,9 @@
 /*
  * imgCheckbox
  *
- * Version: 0.5.0
+ * Version: 0.5.1
  * License: GPLv2
  * Author:  James Cuénod
- * Last Modified: 2015.07.30
  *
  */
 (function($) {
@@ -51,6 +50,13 @@
 		"bottom-right": {
 		  "bottom": "0.5%",
 			"right": "0.5%",
+		},
+		"center": {
+		  "top": "0.5%",
+		  "bottom": "0.5%",
+			"left": "0.5%",
+			"right": "0.5%",
+			"margin": "auto",
 		},
 	};
 
