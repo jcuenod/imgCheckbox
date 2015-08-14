@@ -9,10 +9,10 @@
 (function($) {
 	var CHK_TOGGLE = 0;
 	var CHK_SELECT = 1;
-  var CHK_DESELECT = 2;
+	var CHK_DESELECT = 2;
 	var CHECKMARK_POSITION = {
 		"top-left": {
-		  "top": "0.5%",
+			"top": "0.5%",
 			"left": "0.5%",
 		},
 		"top": {
@@ -23,7 +23,7 @@
 		},
 		"top-right": {
 			"top": "0.5%",
-		  "right": "0.5%",
+			"right": "0.5%",
 		},
 		"left": {
 			"left": "0.5%",
@@ -48,12 +48,12 @@
 			"margin": "auto",
 		},
 		"bottom-right": {
-		  "bottom": "0.5%",
+			"bottom": "0.5%",
 			"right": "0.5%",
 		},
 		"center": {
-		  "top": "0.5%",
-		  "bottom": "0.5%",
+			"top": "0.5%",
+			"bottom": "0.5%",
 			"left": "0.5%",
 			"right": "0.5%",
 			"margin": "auto",
@@ -98,7 +98,7 @@
 		/* *** STYLESHEET STUFF *** */
 		// shove in the custom check mark
 		if (options.checkMarkImage !== false)
-			$.extend(true, $finalStyles, { "span.imgCheckbox::before": { "background-image": "url('" + options.checkMarkImage + "')" }});
+		$.extend(true, $finalStyles, { "span.imgCheckbox::before": { "background-image": "url('" + options.checkMarkImage + "')" }});
 		// give the checkmark dimensions
 		var chkDimensions = options.checkMarkSize.split(" ");
 		$.extend(true, $finalStyles, { "span.imgCheckbox::before": {
@@ -168,7 +168,7 @@
 		{
 			$wrapperElement.each(function(index) {
 				if (options.preselect.indexOf(index) >= 0)
-					$(this).addClass("imgChked");
+				$(this).addClass("imgChked");
 			});
 		}
 		// set up click handler
@@ -179,19 +179,19 @@
 		});
 
 		/* *** INJECT INTO FORM *** */
-	  if (options.addToForm instanceof jQuery || options.addToForm === true)
+		if (options.addToForm instanceof jQuery || options.addToForm === true)
 		{
-	    if (options.addToForm === true)
-	    {
+			if (options.addToForm === true)
+			{
 				options.addToForm = $(element).closest("form");
-	    }
+			}
 			if (options.addToForm.length === 0)
 			{
 				if (options.debugMessages)
-					console.log("imgCheckbox: no form found (looks for form by default)");
+				console.log("imgCheckbox: no form found (looks for form by default)");
 				options.addToForm = false;
 			}
-	  }
+		}
 		if (options.addToForm !== false)
 		{
 			$(element).each(function(index) {
@@ -234,7 +234,7 @@
 		var ruleSet = "";
 		for (var property in ruleObject) {
 			if (ruleObject.hasOwnProperty(property)) {
-				 ruleSet += property + ":" + ruleObject[property] + ";";
+				ruleSet += property + ":" + ruleObject[property] + ";";
 			}
 		}
 		return ruleSet;
@@ -339,9 +339,9 @@
 		},
 		"span.imgCheckbox": {
 			"user-select": "none",
-		  "-webkit-user-select": "none",  /* Chrome all / Safari all */
-		  "-moz-user-select": "none",     /* Firefox all */
-  		"-ms-user-select": "none",      /* IE 10+ */
+			"-webkit-user-select": "none",  /* Chrome all / Safari all */
+			"-moz-user-select": "none",	 /* Firefox all */
+			"-ms-user-select": "none",	  /* IE 10+ */
 			"position": "relative",
 			"padding": "0",
 			"margin": "5px",
