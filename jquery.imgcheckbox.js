@@ -1,7 +1,7 @@
 /*
  * imgCheckbox
  *
- * Version: 0.5.1
+ * Version: 0.5.2
  * License: GPLv2
  * Author:  James Cuénod
  *
@@ -153,14 +153,14 @@
 		$wrapperElement.each(function() {
 			var $that = $(this);
 			$(this).data("imgchk.deselect", function(){
-				changeSelection($that, CHK_DESELECT, options.addToForm, options.radio, $wrapperElement);
+				changeSelection($that, CHK_DESELECT, options.addToForm, options.radio, options.canDeselect, $wrapperElement);
 			}).data("imgchk.select", function(){
-				changeSelection($that, CHK_SELECT, options.addToForm, options.radio, $wrapperElement);
+				changeSelection($that, CHK_SELECT, options.addToForm, options.radio, options.canDeselect, $wrapperElement);
 			});
 			$(this).children().first().data("imgchk.deselect", function(){
-				changeSelection($that, CHK_DESELECT, options.addToForm, options.radio, $wrapperElement);
+				changeSelection($that, CHK_DESELECT, options.addToForm, options.radio, options.canDeselect, $wrapperElement);
 			}).data("imgchk.select", function(){
-				changeSelection($that, CHK_SELECT, options.addToForm, options.radio, $wrapperElement);
+				changeSelection($that, CHK_SELECT, options.addToForm, options.radio, options.canDeselect, $wrapperElement);
 			});
 		});
 		// preselect elements
@@ -173,7 +173,7 @@
 		}
 		// set up click handler
 		$wrapperElement.click(function() {
-			changeSelection($(this), CHK_TOGGLE, options.addToForm, options.radio, $wrapperElement);
+			changeSelection($(this), CHK_TOGGLE, options.addToForm, options.radio, options.canDeselect, $wrapperElement);
 			if (options.onclick)
 				options.onclick();
 		});
@@ -250,12 +250,18 @@
 		}
 	}
 
-	function changeSelection($chosenElement, howToModify, addToForm, radio, $wrapperElement)
+	function changeSelection($chosenElement, howToModify, addToForm, radio, canDeselect, $wrapperElement)
 	{
 		if (radio && howToModify !== CHK_DESELECT)
 		{
-			$wrapperElement.removeClass("imgChked");
-			$chosenElement.addClass("imgChked");
+			$wrapperElement.not($chosenElement).removeClass("imgChked");
+			if (canDeselect)
+			{
+				$chosenElement.toggleClass("imgChked");
+			}
+			else {
+				$chosenElement.addClass("imgChked");
+			}
 		}
 		else
 		{
@@ -324,6 +330,7 @@
 		"addToForm": true,
 		"preselect": [],
 		"radio": false,
+		"canDeselect": false,
 		"onload": false,
 		"onclick": false,
 		"debugMessages": false,

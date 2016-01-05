@@ -91,7 +91,13 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
         <tr>
             <td>radio</td>
             <td>Boolean</td>
-            <td>Images function as radio/option buttons (rather than checkboxes). Only one can be selected.</td>
+            <td>Images function as radio/option buttons (rather than checkboxes). Only one can be selected. No element is automatically preselected (see <code>preselect</code>).</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>canDeselect</td>
+            <td>Boolean</td>
+            <td>When the radio option is set to true, this option allows the selected image to be deselected.</td>
             <td>false</td>
         </tr>
         <tr>
