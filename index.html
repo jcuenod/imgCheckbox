@@ -120,18 +120,24 @@
 								<td> imgCheckbox can inject the checked elements into the form. If <code>true</code>, imgCheckbox will find a parent form and attach to it. Alternatively, a jQuery object can be passed in shadow checkboxes will be appended to and controlled within it (the images needn't even be within the form).</td>
 								<td>true</td>
 							</tr>
-			        <tr>
-			            <td>preselect</td>
-			            <td>[Integer]</td>
-			            <td>To preselect certain elements, use this syntax:<br /><code>{ preselect: [0,1,2]}</code></td>
-			            <td>[]</td>
-			        </tr>
-			        <tr>
-			            <td>radio</td>
-			            <td>Boolean</td>
-			            <td>Images function as radio/option buttons (rather than checkboxes). Only one can be selected.</td>
-			            <td>false</td>
-			        </tr>
+							<tr>
+								<td>preselect</td>
+								<td>[Integer]</td>
+								<td>To preselect certain elements, use this syntax:<br /><code>{ preselect: [0,1,2]}</code></td>
+								<td>[]</td>
+							</tr>
+							<tr>
+								<td>radio</td>
+								<td>Boolean</td>
+								<td>Images function as radio/option buttons (rather than checkboxes). Only one can be selected. No element is automatically preselected (see <code>preselect</code>).</td>
+								<td>false</td>
+							</tr>
+							<tr>
+								<td>canDeselect</td>
+								<td>Boolean</td>
+								<td>When the radio option is set to true, this option allows the selected image to be deselected.</td>
+								<td>false</td>
+							</tr>
 							<tr>
 								<td>styles</td>
 								<td>Object</td>
