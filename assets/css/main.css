@@ -4044,7 +4044,7 @@
 	}
 
 #headermenu {
-	background-color: rgba(238,238,221,0.1);
+	background-color: rgba(145,176,161,0.8);
 	position: fixed;
 	top: 0;
 	padding: 0;
@@ -4054,7 +4054,7 @@
 	transition: background-color 1500ms ease-in-out;
 }
 #headermenu.scrollDown {
-	background-color: rgba(0,0,0,0.1);
+	background-color: rgba(136,170,153,0.8);
 }
 #headermenu .lhs {
 	float: left;
@@ -4065,7 +4065,7 @@
 #headermenu a {
 	float: left;
 	display: inline-block;
-	color: rgba(238,238,221,0.5);
+	color: rgba(238,238,221,0.7);
 	font-weight: bold;
 	border: none;
 	margin: 0;
@@ -4073,15 +4073,11 @@
 	transition: padding 1s ease-in-out, color 1s ease-in-out;
 }
 #headermenu a:hover {
-	background-color: rgba(238,238,221,0.3);
+	background-color: rgba(238,238,221,0.1);
 	transition: background-color 100ms ease-in-out;
 }
 #headermenu.scrollDown a {
 	padding: 0.5em 1.5em;
-	color: #88AA99;
-}
-#headermenu.scrollDown a:hover {
-	background-color: #EEEEDD;
 }
 
 .spacer {
