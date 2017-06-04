@@ -158,6 +158,13 @@
 					<pre><code style="text-align: left">$("img").imgCheckbox({
     onload: function(){
         // Do something fantastic!
+    },
+    onclick: function(el){
+    	var isChecked = el.hasClass("imgChked"),
+	    imgEl = el.children().first();
+	    
+	// if your <img> tag has an id attribute...
+	console.log(imgEl.id + " is now " + isChecked? "checked": "not-checked" + "!");
     }
 });</code></pre>
 					<table class="alt">
