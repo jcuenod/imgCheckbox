@@ -1,7 +1,7 @@
 /*
  * imgCheckbox
  *
- * Version: 0.5.2
+ * Version: 0.5.3
  * License: GPLv2
  * Author:  James Cuénod
  *
