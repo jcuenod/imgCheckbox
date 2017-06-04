@@ -175,7 +175,7 @@
 		$wrapperElement.click(function() {
 			changeSelection($(this), CHK_TOGGLE, options.addToForm, options.radio, options.canDeselect, $wrapperElement);
 			if (options.onclick)
-				options.onclick();
+				options.onclick(this);
 		});
 
 		/* *** INJECT INTO FORM *** */
