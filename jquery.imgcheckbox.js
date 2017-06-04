@@ -173,9 +173,10 @@
 		}
 		// set up click handler
 		$wrapperElement.click(function() {
-			changeSelection($(this), CHK_TOGGLE, options.addToForm, options.radio, options.canDeselect, $wrapperElement);
+			var el = $(this); 
+			changeSelection(el, CHK_TOGGLE, options.addToForm, options.radio, options.canDeselect, $wrapperElement);
 			if (options.onclick)
-				options.onclick(this);
+				options.onclick(el);
 		});
 
 		/* *** INJECT INTO FORM *** */
