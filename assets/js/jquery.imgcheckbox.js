@@ -1,7 +1,7 @@
 /*
  * imgCheckbox
  *
- * Version: 0.5.2
+ * Version: 0.5.3
  * License: GPLv2
  * Author:  James Cuénod
  *
@@ -173,9 +173,10 @@
 		}
 		// set up click handler
 		$wrapperElement.click(function() {
-			changeSelection($(this), CHK_TOGGLE, options.addToForm, options.radio, options.canDeselect, $wrapperElement);
+			var el = $(this); 
+			changeSelection(el, CHK_TOGGLE, options.addToForm, options.radio, options.canDeselect, $wrapperElement);
 			if (options.onclick)
-				options.onclick();
+				options.onclick(el);
 		});
 
 		/* *** INJECT INTO FORM *** */
