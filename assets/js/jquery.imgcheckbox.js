@@ -1,7 +1,7 @@
 /*
  * imgCheckbox
  *
- * Version: 0.5.3
+ * Version: 0.5.4
  * License: GPLv2
  * Author:  James Cuénod
  *
@@ -164,13 +164,14 @@
 			});
 		});
 		// preselect elements
-		if (options.preselect.length > 0)
+		if (options.preselect === true || options.preselect.length > 0)
 		{
 			$wrapperElement.each(function(index) {
-				if (options.preselect.indexOf(index) >= 0)
+				if (options.preselect === true || options.preselect.indexOf(index) >= 0)
 				$(this).addClass("imgChked");
 			});
 		}
+
 		// set up click handler
 		$wrapperElement.click(function() {
 			var el = $(this); 
