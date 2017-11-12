@@ -1,7 +1,7 @@
 /*
  * imgCheckbox
  *
- * Version: 0.5.3
+ * Version: 0.5.4
  * License: GPLv2
  * Author:  James Cuénod
  *
@@ -163,20 +163,15 @@
 				changeSelection($that, CHK_SELECT, options.addToForm, options.radio, options.canDeselect, $wrapperElement);
 			});
 		});
-		// preselectAll elements
-		if (options.preselectAll === true) {
-		    $wrapperElement.each(function () {
-			$(this).addClass("imgChked");
-		    });
+		// preselect elements
+		if (options.preselect === true || options.preselect.length > 0)
+		{
+			$wrapperElement.each(function(index) {
+				if (options.preselect === true || options.preselect.indexOf(index) >= 0)
+				$(this).addClass("imgChked");
+			});
 		}
 
-		// preselect elements
-		if (options.preselectAll !== true && options.preselect.length > 0) {
-		    $wrapperElement.each(function (index) {
-			if (options.preselect.indexOf(index) >= 0)
-			    $(this).addClass("imgChked");
-		    });
-		}
 		// set up click handler
 		$wrapperElement.click(function() {
 			var el = $(this); 
@@ -335,7 +330,6 @@
 		"scaleCheckMark": true,
 		"fadeCheckMark": false,
 		"addToForm": true,
-		"preselectAll": false,
 		"preselect": [],
 		"radio": false,
 		"canDeselect": false,
