@@ -84,8 +84,8 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
         </tr>
         <tr>
             <td>preselect</td>
-            <td>[Integer]</td>
-            <td>To preselect certain elements, use this syntax:<br /><code>{ preselect: [0,1,2]}</code></td>
+            <td>[Integer] / Boolean</td>
+            <td>To preselect certain elements, use this syntax:<br /><code>{ preselect: [0,1,2] }</code><br /> Alternatively, you may preselect all elements using the syntax:<br /><code>{ preselect: true }</code></td>
             <td>[]</td>
         </tr>
         <tr>
@@ -137,6 +137,12 @@ Event callbacks are accessible via the options object. Use the syntax:
 $("img").imgCheckbox({
     onload: function(){
       // Do something fantastic!
+    },
+    onclick: function(el){
+    	var isChecked = el.hasClass("imgChked"),
+	    imgEl = el.children()[0];  // the img element
+	    
+	console.log(imgEl.name + " is now " + (isChecked? "checked": "not-checked") + "!");
     }
 });
 ```
