@@ -82,6 +82,12 @@ $("img.checkableGroup2").imgCheckbox({ "graySelected": false });
             <td>imgCheckbox can inject the checked elements into the form. If <code>true</code>, imgCheckbox will find a parent form and hook into its submission. A jQuery object can be passed in and the <code>submit</code> listener will attach to it.</td>
             <td>true</td>
         </tr>
+  	<tr>
+            <td>preselectAll</td>
+            <td>Boolean</td>
+            <td>To preselect all elements, use this syntax:<br /><code>{ preselectAll: true}</code></td>
+            <td>false</td>
+        </tr>
         <tr>
             <td>preselect</td>
             <td>[Integer] / Boolean</td>
